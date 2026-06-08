@@ -271,6 +271,10 @@ El sistema es una aplicación de escritorio autónoma que opera con persistencia
 
 ### 4.1 Diagrama de Casos de Uso
 
+![[diagrama-casos-de-uso.png]]
+
+<details>
+<summary>Código PlantUML</summary>
 ```plantuml
 @startuml
 left to right direction
@@ -300,7 +304,7 @@ odon --> CU02
 odon --> CU03
 odon --> CU07
 @enduml
-```
+</details>
 
 ### 4.2 Especificación de Casos de Uso
 
