@@ -19,44 +19,6 @@
 
 ---
 
-## Índice
-
-- [[#Ficha del Documento|Ficha del Documento]]
-- [[#Índice|Índice]]
-- [[#1. Introducción|1. Introducción]]
-	- [[#1. Introducción#1.1 Propósito|1.1 Propósito]]
-	- [[#1. Introducción#1.2 Alcance|1.2 Alcance]]
-	- [[#1. Introducción#1.3 Personal Involucrado|1.3 Personal Involucrado]]
-	- [[#1. Introducción#1.4 Definiciones, acrónimos y abreviaturas|1.4 Definiciones, acrónimos y abreviaturas]]
-	- [[#1. Introducción#1.5 Referencias|1.5 Referencias]]
-	- [[#1. Introducción#1.6 Resumen|1.6 Resumen]]
-	- [[#1. Introducción#1.7 Glosario de Términos|1.7 Glosario de Términos]]
-- [[#2. Descripción General|2. Descripción General]]
-	- [[#2. Descripción General#2.1 Perspectiva del Producto|2.1 Perspectiva del Producto]]
-	- [[#2. Descripción General#2.2 Funcionalidad del Producto|2.2 Funcionalidad del Producto]]
-	- [[#2. Descripción General#2.3 Características de los Usuarios|2.3 Características de los Usuarios]]
-	- [[#2. Descripción General#2.4 Restricciones|2.4 Restricciones]]
-	- [[#2. Descripción General#2.5 Suposiciones y Dependencias|2.5 Suposiciones y Dependencias]]
-- [[#3. Requisitos Específicos|3. Requisitos Específicos]]
-	- [[#3. Requisitos Específicos#3.1 Requisitos Comunes de las Interfaces|3.1 Requisitos Comunes de las Interfaces]]
-	- [[#3. Requisitos Específicos#3.2 Requerimientos Funcionales (RF)|3.2 Requerimientos Funcionales (RF)]]
-	- [[#3. Requisitos Específicos#3.3 Requerimientos de Dominio (RD)|3.3 Requerimientos de Dominio (RD)]]
-	- [[#3. Requisitos Específicos#3.4 Requerimientos No Funcionales (RNF)|3.4 Requerimientos No Funcionales (RNF)]]
-- [[#4. Casos de Uso|4. Casos de Uso]]
-	- [[#4. Casos de Uso#4.1 Diagrama de Casos de Uso|4.1 Diagrama de Casos de Uso]]
-	- [[#4. Casos de Uso#4.2 Especificación de Casos de Uso|4.2 Especificación de Casos de Uso]]
-		- [[#4.2 Especificación de Casos de Uso#CU-01: Registrar Paciente|CU-01: Registrar Paciente]]
-		- [[#4.2 Especificación de Casos de Uso#CU-02: Buscar Paciente por DNI|CU-02: Buscar Paciente por DNI]]
-		- [[#4.2 Especificación de Casos de Uso#CU-03: Listar Pacientes|CU-03: Listar Pacientes]]
-		- [[#4.2 Especificación de Casos de Uso#CU-04: Modificar Paciente|CU-04: Modificar Paciente]]
-		- [[#4.2 Especificación de Casos de Uso#CU-05: Eliminar Paciente|CU-05: Eliminar Paciente]]
-		- [[#4.2 Especificación de Casos de Uso#CU-06: Gestionar Turno|CU-06: Gestionar Turno]]
-		- [[#4.2 Especificación de Casos de Uso#CU-07: Consultar Historia Clínica|CU-07: Consultar Historia Clínica]]
-	- [[#4. Casos de Uso#4.3 Matriz de Trazabilidad|4.3 Matriz de Trazabilidad]]
-- [[#5. Anexo: Priorización MoSCoW|5. Anexo: Priorización MoSCoW]]
-
----
-
 ## 1. Introducción
 
 ### 1.1 Propósito
