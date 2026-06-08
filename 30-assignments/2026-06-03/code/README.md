@@ -12,7 +12,7 @@ Aplicación de escritorio para digitalizar la gestión de pacientes de un consul
 
 Separación estricta en dos capas:
 
-```
+```text
 code/
 ├── consultorio.py              # Capa de datos/negocio
 ├── formulario_odontologico.py   # Capa de interfaz gráfica
