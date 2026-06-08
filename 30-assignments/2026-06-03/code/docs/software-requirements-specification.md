@@ -8,9 +8,9 @@
 
 ## Ficha del Documento
 
-| Fecha | Revisión | Autor | Verificado por |
-| :--- | :--- | :--- | :--- |
-| 08/06/2026 | 1.0 | Lapenta, Carlos Matías | — |
+| Fecha      | Revisión | Autor                  | Verificado por |
+| :--------- | :------- | :--------------------- | :------------- |
+| 08/06/2026 | 1.0      | Lapenta, Carlos Matías | —              |
 
 **Validación por las partes:**
 
@@ -21,38 +21,39 @@
 
 ## Índice
 
-- [[#Ficha del Documento|Ficha del Documento]]
-- [[#1. Introducción|1. Introducción]]
-	- [[#1. Introducción#1.1 Propósito|1.1 Propósito]]
-	- [[#1. Introducción#1.2 Alcance|1.2 Alcance]]
-	- [[#1. Introducción#1.3 Personal Involucrado|1.3 Personal Involucrado]]
-	- [[#1. Introducción#1.4 Definiciones, acrónimos y abreviaturas|1.4 Definiciones, acrónimos y abreviaturas]]
-	- [[#1. Introducción#1.5 Referencias|1.5 Referencias]]
-	- [[#1. Introducción#1.6 Resumen|1.6 Resumen]]
-	- [[#1. Introducción#1.7 Glosario de Términos|1.7 Glosario de Términos]]
-- [[#2. Descripción General|2. Descripción General]]
-	- [[#2. Descripción General#2.1 Perspectiva del Producto|2.1 Perspectiva del Producto]]
-	- [[#2. Descripción General#2.2 Funcionalidad del Producto|2.2 Funcionalidad del Producto]]
-	- [[#2. Descripción General#2.3 Características de los Usuarios|2.3 Características de los Usuarios]]
-	- [[#2. Descripción General#2.4 Restricciones|2.4 Restricciones]]
-	- [[#2. Descripción General#2.5 Suposiciones y Dependencias|2.5 Suposiciones y Dependencias]]
-- [[#3. Requisitos Específicos|3. Requisitos Específicos]]
-	- [[#3. Requisitos Específicos#3.1 Requisitos Comunes de las Interfaces|3.1 Requisitos Comunes de las Interfaces]]
-	- [[#3. Requisitos Específicos#3.2 Requerimientos Funcionales (RF)|3.2 Requerimientos Funcionales (RF)]]
-	- [[#3. Requisitos Específicos#3.3 Requerimientos de Dominio (RD)|3.3 Requerimientos de Dominio (RD)]]
-	- [[#3. Requisitos Específicos#3.4 Requerimientos No Funcionales (RNF)|3.4 Requerimientos No Funcionales (RNF)]]
-- [[#4. Casos de Uso|4. Casos de Uso]]
-	- [[#4. Casos de Uso#4.1 Diagrama de Casos de Uso|4.1 Diagrama de Casos de Uso]]
-	- [[#4. Casos de Uso#4.2 Especificación de Casos de Uso|4.2 Especificación de Casos de Uso]]
-		- [[#4.2 Especificación de Casos de Uso#CU-01: Registrar Paciente|CU-01: Registrar Paciente]]
-		- [[#4.2 Especificación de Casos de Uso#CU-02: Buscar Paciente por DNI|CU-02: Buscar Paciente por DNI]]
-		- [[#4.2 Especificación de Casos de Uso#CU-03: Listar Pacientes|CU-03: Listar Pacientes]]
-		- [[#4.2 Especificación de Casos de Uso#CU-04: Modificar Paciente|CU-04: Modificar Paciente]]
-		- [[#4.2 Especificación de Casos de Uso#CU-05: Eliminar Paciente|CU-05: Eliminar Paciente]]
-		- [[#4.2 Especificación de Casos de Uso#CU-06: Gestionar Turno|CU-06: Gestionar Turno]]
-		- [[#4.2 Especificación de Casos de Uso#CU-07: Consultar Historia Clínica|CU-07: Consultar Historia Clínica]]
-	- [[#4. Casos de Uso#4.3 Matriz de Trazabilidad|4.3 Matriz de Trazabilidad]]
-- [[#5. Anexo: Priorización MoSCoW|5. Anexo: Priorización MoSCoW]]
+- [Ficha del Documento](#Ficha%20del%20Documento)
+- [Índice](#%C3%8Dndice)
+- [1. Introducción](#1.%20Introducci%C3%B3n)
+	- [1.1 Propósito](#1.1%20Prop%C3%B3sito)
+	- [1.2 Alcance](#1.2%20Alcance)
+	- [1.3 Personal Involucrado](#1.3%20Personal%20Involucrado)
+	- [1.4 Definiciones, acrónimos y abreviaturas](#1.4%20Definiciones,%20acr%C3%B3nimos%20y%20abreviaturas)
+	- [1.5 Referencias](#1.5%20Referencias)
+	- [1.6 Resumen](#1.6%20Resumen)
+	- [1.7 Glosario de Términos](#1.7%20Glosario%20de%20T%C3%A9rminos)
+- [2. Descripción General](#2.%20Descripci%C3%B3n%20General)
+	- [2.1 Perspectiva del Producto](#2.1%20Perspectiva%20del%20Producto)
+	- [2.2 Funcionalidad del Producto](#2.2%20Funcionalidad%20del%20Producto)
+	- [2.3 Características de los Usuarios](#2.3%20Caracter%C3%ADsticas%20de%20los%20Usuarios)
+	- [2.4 Restricciones](#2.4%20Restricciones)
+	- [2.5 Suposiciones y Dependencias](#2.5%20Suposiciones%20y%20Dependencias)
+- [3. Requisitos Específicos](#3.%20Requisitos%20Espec%C3%ADficos)
+	- [3.1 Requisitos Comunes de las Interfaces](#3.1%20Requisitos%20Comunes%20de%20las%20Interfaces)
+	- [3.2 Requerimientos Funcionales (RF)](#3.2%20Requerimientos%20Funcionales%20(RF))
+	- [3.3 Requerimientos de Dominio (RD)](#3.3%20Requerimientos%20de%20Dominio%20(RD))
+	- [3.4 Requerimientos No Funcionales (RNF)](#3.4%20Requerimientos%20No%20Funcionales%20(RNF))
+- [4. Casos de Uso](#4.%20Casos%20de%20Uso)
+	- [4.1 Diagrama de Casos de Uso](#4.1%20Diagrama%20de%20Casos%20de%20Uso)
+	- [4.2 Especificación de Casos de Uso](#4.2%20Especificaci%C3%B3n%20de%20Casos%20de%20Uso)
+		- [CU-01: Registrar Paciente](#CU-01:%20Registrar%20Paciente)
+		- [CU-02: Buscar Paciente por DNI](#CU-02:%20Buscar%20Paciente%20por%20DNI)
+		- [CU-03: Listar Pacientes](#CU-03:%20Listar%20Pacientes)
+		- [CU-04: Modificar Paciente](#CU-04:%20Modificar%20Paciente)
+		- [CU-05: Eliminar Paciente](#CU-05:%20Eliminar%20Paciente)
+		- [CU-06: Gestionar Turno](#CU-06:%20Gestionar%20Turno)
+		- [CU-07: Consultar Historia Clínica](#CU-07:%20Consultar%20Historia%20Cl%C3%ADnica)
+	- [4.3 Matriz de Trazabilidad](#4.3%20Matriz%20de%20Trazabilidad)
+- [5. Anexo: Priorización MoSCoW](#5.%20Anexo:%20Priorizaci%C3%B3n%20MoSCoW)
 
 ---
 
