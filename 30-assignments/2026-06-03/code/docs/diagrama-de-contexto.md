@@ -2,64 +2,7 @@
 
 System Boundary del sistema de gestión odontológica.
 
-```mermaid
----
-config:
-  theme: 'neutral'
----
-graph TD
-    subgraph "Sistema Saca Muela"
-        SM[Sistema de Gestión<br>Odontológica]
-    end
-
-    A[Recepcionista] -->|Registra, busca,<br>modifica pacientes| SM
-    A -->|Asigna y gestiona<br>turnos| SM
-    A -->|Consulta historia<br>clínica| SM
-
-    B[Odontólogo] -->|Consulta agenda<br>de turnos| SM
-    B -->|Registra historia<br>clínica| SM
-    B -->|Visualiza datos<br>del paciente| SM
-
-    DB[(Base de Datos<br>SQLite3)] <-->|Persistencia local| SM
-
-    SM -->|Listados y<br>reportes| A
-    SM -->|Historial clínico<br>completo| B
-
-    style A fill:#e1f5fe
-    style B fill:#e1f5fe
-    style DB fill:#fff3e0
-    style SM fill:#e8f5e9
-```
-
-```plantuml
-@startuml
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
-
-LAYOUT_TOP_DOWN()
-LAYOUT_WITH_LEGEND()
-
-SystemDb(db, "Base de Datos\n(SQLite3)", "Persistencia local")
-
-System_Boundary(sm, "Sistema Saca Muela") {
-    System(sistema, "Sistema de Gestión\nOdontológica")
-}
-
-Person(recepcionista, "Recepcionista", "Personal administrativo")
-Person(odontologo, "Odontólogo", "Profesional de salud dental")
-
-Rel(recepcionista, sistema, "Registra, busca,\nmodifica pacientes")
-Rel(recepcionista, sistema, "Asigna y gestiona\nturnos")
-Rel(recepcionista, sistema, "Consulta historia clínica")
-Rel(odontologo, sistema, "Consulta agenda\nde turnos")
-Rel(odontologo, sistema, "Registra historia clínica")
-Rel(odontologo, sistema, "Visualiza datos\ndel paciente")
-Rel(sistema, recepcionista, "Listados y reportes")
-Rel(sistema, odontologo, "Historial clínico\ncompleto")
-Rel(sistema, db, "Persistencia local")
-Rel(db, sistema, "Persistencia local")
-@enduml
-```
-
+![[diagrama-contexto-de-sistema-mmdc.png]]
 
 ## Actores del Sistema
 
