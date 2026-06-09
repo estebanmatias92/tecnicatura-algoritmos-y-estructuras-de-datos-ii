@@ -31,6 +31,36 @@ graph TD
     style SM fill:#e8f5e9
 ```
 
+```plantuml
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+LAYOUT_TOP_DOWN()
+LAYOUT_WITH_LEGEND()
+
+SystemDb(db, "Base de Datos\n(SQLite3)", "Persistencia local")
+
+System_Boundary(sm, "Sistema Saca Muela") {
+    System(sistema, "Sistema de Gestión\nOdontológica")
+}
+
+Person(recepcionista, "Recepcionista", "Personal administrativo")
+Person(odontologo, "Odontólogo", "Profesional de salud dental")
+
+Rel(recepcionista, sistema, "Registra, busca,\nmodifica pacientes")
+Rel(recepcionista, sistema, "Asigna y gestiona\nturnos")
+Rel(recepcionista, sistema, "Consulta historia clínica")
+Rel(odontologo, sistema, "Consulta agenda\nde turnos")
+Rel(odontologo, sistema, "Registra historia clínica")
+Rel(odontologo, sistema, "Visualiza datos\ndel paciente")
+Rel(sistema, recepcionista, "Listados y reportes")
+Rel(sistema, odontologo, "Historial clínico\ncompleto")
+Rel(sistema, db, "Persistencia local")
+Rel(db, sistema, "Persistencia local")
+@enduml
+```
+
+
 ## Actores del Sistema
 
 | Actor | Descripción | Responsabilidades |
