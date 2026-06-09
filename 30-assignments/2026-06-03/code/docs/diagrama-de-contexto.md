@@ -1,8 +1,13 @@
+---
+author: Lapenta Carlos Matías
+title: System Boundary Diagram
+date: 2026-06-08
+---
 # Diagrama de Contexto — Saca Muela
 
 System Boundary del sistema de gestión odontológica.
 
-![[diagrama-contexto-de-sistema-mmdc.png]]
+![System-Context Diagram](diagrama-contexto-de-sistema-mmdc.png)
 
 ## Actores del Sistema
 

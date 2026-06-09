@@ -1,3 +1,9 @@
+---
+author: Lapenta Carlos Matías
+title: Software Requirements Specification (SRS)
+date: 2026-06-08
+toc: true
+---
 # Especificación de Requisitos de Software (SRS)
 
 **Proyecto:** Saca Muela — Sistema de Gestión Odontológica
