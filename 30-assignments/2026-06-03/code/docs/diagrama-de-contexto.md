@@ -3,6 +3,10 @@
 System Boundary del sistema de gestión odontológica.
 
 ```mermaid
+---
+config:
+  theme: 'base'
+---
 graph TD
     subgraph "Sistema Saca Muela"
         SM[Sistema de Gestión<br>Odontológica]
