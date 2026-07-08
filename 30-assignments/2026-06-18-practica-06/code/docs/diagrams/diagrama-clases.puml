@@ -1,0 +1,86 @@
+@startuml
+title Diagrama de Clases — Patrón Decorator para Alojamientos
+skinparam classAttributeIconSize 0
+
+'Interfaz / Componente abstracto
+abstract class Alojamiento {
+  + getDescripcion(): std::string
+  + calcularPrecio(): double
+  + virtual ~Alojamiento() = default
+}
+
+'Componente concreto
+class Hotel {
+  - nombre: std::string
+  - precioBase: double
+  + Hotel(nombre: std::string, precioBase: double)
+  + getDescripcion(): std::string override
+  + calcularPrecio(): double override
+}
+
+'Componentes concretos futuros (extensibilidad)
+class Hostel {
+  - nombre: std::string
+  - precioBase: double
+  + Hostel(nombre: std::string, precioBase: double)
+  + getDescripcion(): std::string override
+  + calcularPrecio(): double override
+}
+
+class Apartamento {
+  - nombre: std::string
+  - precioBase: double
+  + Apartamento(nombre: std::string, precioBase: double)
+  + getDescripcion(): std::string override
+  + calcularPrecio(): double override
+}
+
+'Decorador abstracto
+abstract class AlojamientoDecorator {
+  - alojamiento: Alojamiento*
+  + AlojamientoDecorator(alojamiento: Alojamiento*)
+  + getDescripcion(): std::string override
+  + calcularPrecio(): double override
+}
+
+'Decoradores concretos
+class Piscina {
+  + Piscina(alojamiento: Alojamiento*)
+  + getDescripcion(): std::string override
+  + calcularPrecio(): double override
+}
+
+class Desayuno {
+  + Desayuno(alojamiento: Alojamiento*)
+  + getDescripcion(): std::string override
+  + calcularPrecio(): double override
+}
+
+class Gimnasio {
+  + Gimnasio(alojamiento: Alojamiento*)
+  + getDescripcion(): std::string override
+  + calcularPrecio(): double override
+}
+
+class Wifi {
+  + Wifi(alojamiento: Alojamiento*)
+  + getDescripcion(): std::string override
+  + calcularPrecio(): double override
+}
+
+'Relaciones
+Alojamiento <|-- Hotel : implements
+Alojamiento <|-- Hostel : implements
+Alojamiento <|-- Apartamento : implements
+Alojamiento <|-- AlojamientoDecorator : implements
+AlojamientoDecorator o-- Alojamiento : wraps
+AlojamientoDecorator <|-- Piscina : extends
+AlojamientoDecorator <|-- Desayuno : extends
+AlojamientoDecorator <|-- Gimnasio : extends
+AlojamientoDecorator <|-- Wifi : extends
+
+note bottom of Alojamiento : Componente abstracto\n(interfaz común)
+note bottom of AlojamientoDecorator : Decorador abstracto\n(envuelve un componente)
+note bottom of Hotel : Componente concreto\n(hotel base sin extras)
+
+@enduml

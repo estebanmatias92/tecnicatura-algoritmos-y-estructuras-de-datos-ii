@@ -1,0 +1,14 @@
+build/
+*.o
+*.obj
+*.exe
+*.out
+obj/
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+.task-state.json
+presupuesto_hotelero
