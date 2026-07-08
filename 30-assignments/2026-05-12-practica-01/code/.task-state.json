@@ -1,0 +1,8 @@
+{
+  "phase": "complete",
+  "task_file": "lapenta-carlos-matias-unidad-02-practica-01-python-oop.md",
+  "type": "practica",
+  "tier": 2,
+  "stack": "python-venv",
+  "artifacts": {}
+}

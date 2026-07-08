@@ -7,7 +7,7 @@ date: 2026-06-08
 
 System Boundary del sistema de gestión odontológica.
 
-![System-Context Diagram](_assets/diagrama-contexto-de-sistema-mmdc.png)
+![System-Context Diagram](diagrama-contexto-de-sistema-mmdc.png)
 
 ## Actores del Sistema
 

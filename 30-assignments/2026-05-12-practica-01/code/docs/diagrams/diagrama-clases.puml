@@ -1,0 +1,134 @@
+@startuml
+' Diagrama de Clases — basado en consignas 2.1, 6.1, 7.1
+skinparam classAttributeIconSize 0
+
+' === Sección 2: Herencia Animal ===
+class Animal {
+  + nombre: str
+  + __edad: int
+  + __init__(nombre, edad)
+  + {abstract} hablar(): str
+  + {abstract} moverse(): str
+  + describirme(): str
+  + {property} edad: int
+  + {property} edad.setter
+}
+
+class Perro {
+  + __init__(nombre, edad)
+  + hablar(): str
+  + moverse(): str
+}
+
+class Vaca {
+  + __init__(nombre, edad)
+  + hablar(): str
+  + moverse(): str
+}
+
+class Abeja {
+  + __init__(nombre, edad)
+  + hablar(): str
+  + moverse(): str
+}
+
+Animal <|-- Perro
+Animal <|-- Vaca
+Animal <|-- Abeja
+
+' === Sección 6: ABC Drones ===
+abstract class Dron {
+  + nombre: str
+  + {abstract} despegar(): str
+  + {abstract} aterrizar(): str
+  + {abstract} acelerar(): str
+  + {abstract} frenar(): str
+  + {abstract} doblar_izquierda(): str
+  + {abstract} doblar_derecha(): str
+  + {abstract} sacar_foto(): str
+  + pilotear(comando: str): str
+}
+
+class Tricoptero {
+  + despegar(): str
+  + aterrizar(): str
+  + acelerar(): str
+  + frenar(): str
+  + doblar_izquierda(): str
+  + doblar_derecha(): str
+  + sacar_foto(): str
+}
+
+class Cuadricoptero {
+  + despegar(): str
+  + aterrizar(): str
+  + acelerar(): str
+  + frenar(): str
+  + doblar_izquierda(): str
+  + doblar_derecha(): str
+  + sacar_foto(): str
+}
+
+class Hexacoptero {
+  + despegar(): str
+  + aterrizar(): str
+  + acelerar(): str
+  + frenar(): str
+  + doblar_izquierda(): str
+  + doblar_derecha(): str
+  + sacar_foto(): str
+}
+
+class Octocoptero {
+  + despegar(): str
+  + aterrizar(): str
+  + acelerar(): str
+  + frenar(): str
+  + doblar_izquierda(): str
+  + doblar_derecha(): str
+  + sacar_foto(): str
+}
+
+class Coaxial {
+  + despegar(): str
+  + aterrizar(): str
+  + acelerar(): str
+  + frenar(): str
+  + doblar_izquierda(): str
+  + doblar_derecha(): str
+  + sacar_foto(): str
+}
+
+Dron <|-- Tricoptero
+Dron <|-- Cuadricoptero
+Dron <|-- Hexacoptero
+Dron <|-- Octocoptero
+Dron <|-- Coaxial
+
+' === Sección 1: POO básico ===
+class Calculadora {
+  + {static} version: str
+  + __init__(self)
+  + sumar(a, b): float
+  + restar(a, b): float
+  + multiplicar(a, b): float
+  + dividir(a, b): float
+  + {classmethod} mostrar_version(): str
+  + {static} validar_numeros(a, b): bool
+}
+
+' === Sección 7: Duck Typing ===
+class Gato {
+  + nombre: str
+  + hablar(): str
+}
+
+class Pato {
+  + nombre: str
+  + hablar(): str
+}
+
+Perro --> Gato : Duck Typing (mismo método hablar)
+Vaca --> Pato : Duck Typing (mismo método hablar)
+
+@enduml

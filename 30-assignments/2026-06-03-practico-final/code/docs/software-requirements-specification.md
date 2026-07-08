@@ -277,7 +277,7 @@ El sistema es una aplicación de escritorio autónoma que opera con persistencia
 
 ### 4.1 Diagrama de Casos de Uso
 
-![Diagrama CU - Saca Muelas](_assets/diagrama-casos-de-uso.png)
+![Diagrama CU - Saca Muelas](diagrama-casos-de-uso.png)
 
 <details>
 <summary>Código PlantUML</summary>

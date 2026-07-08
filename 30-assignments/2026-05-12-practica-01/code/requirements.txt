@@ -1,0 +1,2 @@
+# No hay dependencias externas — solo se usa la biblioteca estándar de Python.
+# Este archivo se incluye por convención para el setup del entorno virtual.
