@@ -1,0 +1,47 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam componentStyle rectangle
+
+title Arquitectura — Abstract Factory (Muebleria)
+
+package "include/" as INCLUDE {
+  [Chair.hpp] as CHAIR
+  [Sofa.hpp] as SOFA
+  [CoffeeTable.hpp] as TABLE
+
+  [MuebleriaFactory.hpp] as AFACTORY
+
+  [ModernFactory.hpp] as MFACT
+  [VictorianFactory.hpp] as VFACT
+  [ArtDecoFactory.hpp] as AFACT
+}
+
+package "src/" as SRC {
+  [main.cpp] as MAIN
+  [ModernFactory.cpp] as MFACT_CPP
+  [VictorianFactory.cpp] as VFACT_CPP
+  [ArtDecoFactory.cpp] as AFACT_CPP
+}
+
+MAIN --> AFACTORY : "usa"
+MAIN --> MFACT : "instancia"
+MAIN --> VFACT : "instancia"
+MAIN --> AFACT : "instancia"
+
+MFACT_CPP --> AFACTORY : "implementa"
+VFACT_CPP --> AFACTORY : "implementa"
+AFACT_CPP --> AFACTORY : "implementa"
+
+MFACT_CPP --> CHAIR : "crea"
+MFACT_CPP --> SOFA : "crea"
+MFACT_CPP --> TABLE : "crea"
+
+VFACT_CPP --> CHAIR : "crea"
+VFACT_CPP --> SOFA : "crea"
+VFACT_CPP --> TABLE : "crea"
+
+AFACT_CPP --> CHAIR : "crea"
+AFACT_CPP --> SOFA : "crea"
+AFACT_CPP --> TABLE : "crea"
+
+@enduml

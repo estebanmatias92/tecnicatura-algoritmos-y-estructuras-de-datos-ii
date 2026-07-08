@@ -1,0 +1,20 @@
+# --- C++ ---
+build/
+*.o
+*.obj
+*.exe
+*.out
+obj/
+
+# --- IDE ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Artefactos autogenerados ---
+.task-state.json
