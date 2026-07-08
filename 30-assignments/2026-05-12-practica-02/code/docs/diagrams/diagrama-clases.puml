@@ -1,0 +1,126 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+package "core" {
+  class MenuEngine {
+    + ejecutar_menu(opciones: list, titulo: str): int
+    + mostrar_titulo(texto: str)
+    + pausa()
+  }
+
+  class Registry {
+    - {static} _ejercicios: dict
+    + {static} registrar(ej: type)
+    + {static} obtener_por_seccion(seccion: int): list
+    + {static} secciones_disponibles(): dict
+  }
+
+  class EjercicioBase {
+    + {static} seccion: int
+    + {static} numero: int
+    + {static} titulo: str
+    + {abstract} ejecutar()
+  }
+}
+
+package "ejercicios" {
+  class Seccion03Colecciones {
+    + {static} seccion: int = 3
+    + ej_3_1()
+    + ej_3_2()
+    + ej_3_3()
+    + ej_3_4()
+  }
+
+  class Seccion04Bucles {
+    + {static} seccion: int = 4
+    + ej_4_1()
+    + ej_4_2()
+    + ej_4_3()
+    + ej_4_4()
+  }
+
+  class Seccion05Funciones {
+    + {static} seccion: int = 5
+    + ej_5_1()
+    + ej_5_2()
+    + ej_5_3()
+  }
+
+  class Seccion06Funcional {
+    + {static} seccion: int = 6
+    + ej_6_1()
+    + ej_6_2()
+    + ej_6_3()
+  }
+
+  class Seccion07Excepciones {
+    + {static} seccion: int = 7
+    + ej_7_1()
+    + ej_7_2()
+    + ej_7_3()
+  }
+
+  class Seccion08Archivos {
+    + {static} seccion: int = 8
+    + ej_8_1()
+    + ej_8_2()
+    + ej_8_3()
+  }
+
+  class Seccion09Modulos {
+    + {static} seccion: int = 9
+    + ej_9_1()
+    + ej_9_2()
+    + ej_9_3()
+  }
+
+  class Seccion10Testing {
+    + {static} seccion: int = 10
+    + ej_10_1()
+  }
+}
+
+package "presentacion" {
+  class Menus {
+    + arbol_secciones(): dict
+    + menu_principal(): int
+    + menu_ejercicios(seccion: int): int
+  }
+
+  class Formato {
+    + {static} encabezado(texto: str)
+    + {static} separador()
+    + {static} resultado(texto: str)
+  }
+}
+
+package "utils" {
+  class Entrada {
+    + {static} input_int(mensaje: str, min: int, max: int): int
+    + {static} input_si_no(mensaje: str): bool
+  }
+
+  class Validacion {
+    + {static} es_positivo(valor: int): bool
+    + {static} esta_en_rango(valor: int, min: int, max: int): bool
+  }
+}
+
+MenuEngine --> Menus : usa
+Registry --> EjercicioBase : registra
+EjercicioBase <|-- Seccion03Colecciones : hereda
+EjercicioBase <|-- Seccion04Bucles
+EjercicioBase <|-- Seccion05Funciones
+EjercicioBase <|-- Seccion06Funcional
+EjercicioBase <|-- Seccion07Excepciones
+EjercicioBase <|-- Seccion08Archivos
+EjercicioBase <|-- Seccion09Modulos
+EjercicioBase <|-- Seccion10Testing
+Menus --> Registry : consulta
+Menus --> MenuEngine : delega
+Menus --> Formato : usa
+Seccion03Colelections --> Entrada : usa
+Seccion04Bucles --> Entrada : usa
+Seccion05Funciones --> Entrada : usa
+@enduml

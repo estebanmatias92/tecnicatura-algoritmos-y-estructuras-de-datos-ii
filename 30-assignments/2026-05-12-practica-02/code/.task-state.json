@@ -1,0 +1,17 @@
+{
+  "phase": "complete",
+  "task_file": "lapenta-carlos-matias-unidad-02-practica-02-python-estructurado.md",
+  "type": "practica",
+  "tier": 2,
+  "stack": "python-venv",
+  "artifacts": {
+    "glossary": true,
+    "needs_registry": true,
+    "class_diagram": true,
+    "architecture_diagram": true,
+    "diagram_svg": true,
+    "implementation": true,
+    "theory": true,
+    "readme": true
+  }
+}

@@ -1,0 +1,60 @@
+@startuml
+skinparam packageStyle rectangle
+
+left to right direction
+
+package "presentacion" as PRES {
+  [Menus] as M
+  [Formato] as F
+}
+
+package "core" as CORE {
+  [MenuEngine] as ME
+  [Registry] as R
+  [EjercicioBase] as EB
+}
+
+package "ejercicios" as EJ {
+  [Seccion01 Entorno]
+  [Seccion02 Venv]
+  [Seccion03 Colecciones]
+  [Seccion04 Bucles]
+  [Seccion05 Funciones]
+  [Seccion06 Funcional]
+  [Seccion07 Excepciones]
+  [Seccion08 Archivos]
+  [Seccion09 Modulos]
+  [Seccion10 Testing]
+}
+
+package "utils" as UTIL {
+  [Entrada]
+  [Validacion]
+}
+
+PRES --> CORE : <<consulta>>
+CORE --> EJ : <<descubre>>
+EJ --> UTIL : <<usa>>
+PRES --> UTIL : <<usa>>
+
+note top of PRES
+  Interfaz con el usuario
+  menús jerárquicos
+end note
+
+note top of CORE
+  Infraestructura del sistema
+  motor de menú y registro
+end note
+
+note top of EJ
+  Lógica específica de cada
+  consigna práctica
+end note
+
+note top of UTIL
+  Utilidades transversales
+  entrada y validación
+end note
+
+@enduml
