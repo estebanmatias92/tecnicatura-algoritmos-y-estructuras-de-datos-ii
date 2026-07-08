@@ -1,0 +1,26 @@
+@startuml
+' Diagrama de Arquitectura — basado en consignas 3.1, 3.2, 3.3
+skinparam componentStyle rectangle
+
+package "GUI Layer (Tkinter)" {
+  [Login] as LOGIN
+  [Dashboard] as DASH
+  [Calculadora] as CALC
+  [RepairCenter] as REPAIR
+}
+
+package "Data Layer (SQLite)" {
+  [Database] as DB
+  database "pedidos.db" as SQLITE
+}
+
+LOGIN --> DB : valida credenciales
+DASH --> LOGIN : abre (flujo inicio)
+DASH --> CALC : abre
+DASH --> REPAIR : abre
+REPAIR --> DB : CRUD pedidos
+DB --> SQLITE : persistencia
+
+note right of SQLITE : Archivo: pedidos.db\nTablas: pedidos, usuarios
+
+@enduml

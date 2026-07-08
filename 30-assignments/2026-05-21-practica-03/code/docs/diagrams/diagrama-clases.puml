@@ -1,0 +1,64 @@
+@startuml
+' Diagrama de Clases — basado en consignas 3.1, 3.2, 3.3
+skinparam classAttributeIconSize 0
+
+class Database {
+  + get_connection(): Connection
+  + init_db(): None
+  + seed_admin(): None
+  + create_pedido(cliente, direccion, inconveniente, tecnico, visita): int
+  + get_pedidos(): list
+  + update_pedido(id, cliente, direccion, inconveniente, tecnico, visita): None
+  + delete_pedido(id): None
+  + validate_login(usuario, clave): bool
+}
+
+class Calculadora {
+  + __init__(parent)
+  - ventana: Toplevel
+  - entry_a: Entry
+  - entry_b: Entry
+  - resultado: Label
+  + sumar(): None
+  + restar(): None
+  + multiplicar(): None
+  + dividir(): None
+}
+
+class RepairCenter {
+  + __init__(parent)
+  - ventana: Toplevel
+  - tree: Treeview
+  - entries: dict
+  + cargar_pedidos(): None
+  + crear_pedido(): None
+  + modificar_pedido(): None
+  + eliminar_pedido(): None
+  + limpiar_campos(): None
+  + seleccionar_pedido(event): None
+}
+
+class Login {
+  + __init__(parent)
+  - ventana: Toplevel
+  - entry_usuario: Entry
+  - entry_clave: Entry
+  + validar(): None
+}
+
+class Main {
+  + __init__()
+  - root: Tk
+  + abrir_calculadora(): None
+  + abrir_repair_center(): None
+  + abrir_login(): None
+}
+
+Main --> Login : abre
+Login --> Main : cierra login, abre dashboard
+Main --> Calculadora : abre
+Main --> RepairCenter : abre
+RepairCenter --> Database : usa
+Login --> Database : usa
+
+@enduml
