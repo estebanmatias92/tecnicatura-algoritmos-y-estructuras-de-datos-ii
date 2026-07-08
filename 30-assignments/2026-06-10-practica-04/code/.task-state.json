@@ -1,0 +1,12 @@
+{
+  "phase": "complete",
+  "task_file": "lapenta-carlos-matias-unidad-02-practica-04-python-oop.md",
+  "type": "practica",
+  "tier": 1,
+  "stack": "python",
+  "artifacts": {
+    "implementation": true,
+    "theory": true,
+    "readme": true
+  }
+}
