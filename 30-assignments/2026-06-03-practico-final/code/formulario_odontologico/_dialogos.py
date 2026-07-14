@@ -4,6 +4,19 @@ from tkinter import ttk, messagebox
 from consultorio import Paciente
 
 
+def _centrar_ventana(ventana, padre=None):
+    ventana.update_idletasks()
+    ancho = ventana.winfo_width()
+    alto = ventana.winfo_height()
+    if padre and padre.winfo_viewable():
+        x = padre.winfo_rootx() + (padre.winfo_width() - ancho) // 2
+        y = padre.winfo_rooty() + (padre.winfo_height() - alto) // 2
+    else:
+        x = (ventana.winfo_screenwidth() - ancho) // 2
+        y = (ventana.winfo_screenheight() - alto) // 2
+    ventana.geometry(f"+{x}+{y}")
+
+
 class DialogoPaciente(tk.Toplevel):
     def __init__(self, parent, titulo: str, paciente: Paciente | None = None):
         super().__init__(parent)
@@ -18,6 +31,7 @@ class DialogoPaciente(tk.Toplevel):
         self._cargar_datos()
         if self._paciente:
             self._campos["dni"].config(state="readonly")
+        _centrar_ventana(self, self.master)
         self.wait_window()
 
     def _construir_formulario(self):
@@ -101,6 +115,7 @@ class DialogoSeleccionPaciente(tk.Toplevel):
         )
         self.bind("<Return>", lambda e: self._seleccionar())
         self.bind("<Escape>", lambda e: self.destroy())
+        _centrar_ventana(self, self.master)
 
     def _seleccionar(self):
         if not self._combo.get():
@@ -139,6 +154,7 @@ class DialogoSeleccionOdontologo(tk.Toplevel):
         )
         self.bind("<Return>", lambda e: self._aceptar())
         self.bind("<Escape>", lambda e: self.destroy())
+        _centrar_ventana(self, self.master)
         self.wait_window()
 
     def _aceptar(self):
@@ -160,6 +176,7 @@ class DialogoTurno(tk.Toplevel):
         self._paciente = paciente
         self._odontologos = odontologos
         self._construir_formulario()
+        _centrar_ventana(self, self.master)
         self.wait_window()
 
     def _construir_formulario(self):
@@ -240,6 +257,7 @@ class DialogoAsignarTurno(tk.Toplevel):
         self._pacientes = pacientes
         self._odontologos = odontologos
         self._construir_formulario()
+        _centrar_ventana(self, self.master)
         self.wait_window()
 
     def _construir_formulario(self):
