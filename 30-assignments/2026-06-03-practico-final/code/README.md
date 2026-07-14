@@ -30,7 +30,10 @@ code/
 ├── flake.lock                             # Pin de dependencias
 ├── .envrc                                 # Activación automática
 ├── .gitignore
+├── Makefile                               # CLI targets para el dev (run, test, seed, etc.)
 ├── main.py                                # Entry point: conexión → Consultorio → GUI
+├── scripts/
+│   └── seed.py                            # Poblado de datos de prueba en entorno dev
 ├── consultorio/                           # Capa de datos/negocio (package)
 │   ├── __init__.py                        # Re-exporta interfaz pública
 │   ├── consultorio.py                     # Facade — orquesta validación, repos, estado
@@ -104,7 +107,7 @@ code/
 
 - [x] Codificación — Capa de datos/negocio (`consultorio/` package)
 - [x] Codificación — Capa de interfaz (`formulario_odontologico/` package)
-- [x] Pruebas de integración con SQLite `:memory:` (23 tests)
+- [x] Pruebas de integración con SQLite `:memory:` (32 tests)
 - [x] Refactorización Deep Module — separación en módulos internos con seams testables
 - [x] Máquina de estados explícita para Turno (`_EstadoTurno`)
 - [x] Linting (Ruff) + Formato (Black)
@@ -126,6 +129,43 @@ PYTHONPATH=. python3 -m pytest tests/ -v
 # Sin pytest (test runner mínimo):
 PYTHONPATH=. python3 tests/runner.py
 ```
+
+## Herramientas de Desarrollo
+
+### Makefile
+
+El proyecto incluye un `Makefile` con los comandos más frecuentes del flujo de desarrollo:
+
+| Target       | Comando equivalente                         |
+| :----------- | :------------------------------------------ |
+| `make run`   | `python3 main.py [DB]`                      |
+| `make test`  | `python3 -m pytest tests/ -v`               |
+| `make seed`  | `python3 scripts/seed.py [DB]`              |
+| `make reset` | Borra la DB y ejecuta `make seed`           |
+| `make lint`  | `ruff check .`                              |
+| `make format`| `black .`                                   |
+
+La variable `DB` permite elegir el archivo de base de datos:
+
+```bash
+make run DB=test.db
+make seed DB=test.db
+```
+
+### Seed de datos de prueba
+
+El script `scripts/seed.py` puebla la base de datos con datos realistas para desarrollo:
+
+- **6 pacientes** con perfiles variados (con/sin obra social, con/sin teléfono)
+- **Turnos** en distintos estados (Pendiente, Confirmado, Cancelado)
+- **Entradas de historia clínica** para varios pacientes
+
+```bash
+make seed                  # usa saca_muela.db por defecto
+make seed DB=dev.db        # o sobre una DB específica
+```
+
+El seed utiliza la API pública de `Consultorio`, respetando la separación de capas y las reglas de dominio (ej. un paciente sin teléfono no recibe turno).
 
 ## Autor
 
