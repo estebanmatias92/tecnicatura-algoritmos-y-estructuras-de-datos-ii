@@ -1,0 +1,23 @@
+@startuml
+skinparam backgroundColor #FEFEFE
+actor Recepcionista as recep
+participant "FormularioOdontologico" as ui
+participant "PestaniaPacientes" as pest
+participant "Consultorio" as db
+database "SQLite" as sql
+
+recep -> ui : Selecciona pestaña\n"Registrar Paciente"
+ui -> pest : Muestra formulario vacío
+
+recep -> pest : Completa campos\ny presiona Guardar
+pest -> db : registrar_paciente(datos)
+db -> sql : INSERT INTO paciente ...
+db -> pest : return Paciente
+pest -> pest : refrescar_listado()
+pest -> db : listar_pacientes()
+db -> sql : SELECT ... WHERE activo=1
+db -> pest : return list[Paciente]
+pest -> ui : Actualiza Treeview
+pest -> recep : Muestra mensaje de éxito
+
+@enduml

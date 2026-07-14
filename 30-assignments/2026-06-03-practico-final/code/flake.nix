@@ -16,6 +16,7 @@
           packages = with pkgs; [
             (python3.withPackages (ps: with ps; [
               tkinter
+              pytest
             ]))
             sqlite
             plantuml
@@ -26,7 +27,7 @@
           shellHook = ''
             echo "Saca Muela — Dev Environment loaded"
             echo "Python : $(python3 --version)"
-            echo "Tools  : black, ruff, plantuml, sqlite3"
+            echo "Tools  : black, ruff, pytest, plantuml, sqlite3"
             echo "Tkinter: $(python3 -c 'import tkinter; print("ok")')"
           '';
         };

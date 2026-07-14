@@ -1,0 +1,49 @@
+@startuml
+skinparam backgroundColor #FEFEFE
+actor Recepcionista as recep
+participant "PestaniaTurnos" as pest
+participant "DialogoAsignarTurno" as dlg
+participant "Consultorio" as db
+database "SQLite" as sql
+
+== Asignar Turno ==
+
+recep -> pest : Presiona "Asignar Turno"
+pest -> dlg : DialogoAsignarTurno(pacientes, odontologos)
+dlg -> recep : Formulario: paciente, odontólogo,\nfecha, hora, motivo
+recep -> dlg : Completa y presiona Asignar
+dlg -> pest : return datos (dict)
+
+pest -> db : asignar_turno(\n  paciente_id, odontologo_id,\n  fecha, hora, motivo)
+note right: Internamente valida:\n1. Paciente activo\n2. Teléfono registrado\n3. Odontólogo existe\n4. Disponibilidad\n5. Estado Pendiente
+db -> sql : INSERT INTO turno ...\n(estado='Pendiente')
+db -> pest : return Turno
+
+alt Éxito
+  pest -> pest : refrescar_listado()
+  pest -> recep : "Turno asignado"
+else Error validación
+  pest -> recep : "Teléfono requerido" / "Superposición" / etc.
+end
+
+== Confirmar Turno ==
+
+recep -> pest : Selecciona turno Pendiente\ny presiona Confirmar
+pest -> db : confirmar_turno(id)
+note right: Valida transición:\nPendiente → Confirmado
+db -> sql : UPDATE turno\nSET estado = 'Confirmado'\nWHERE id = ?
+db -> pest : return Turno
+pest -> pest : refrescar_listado()
+pest -> recep : "Turno confirmado"
+
+== Cancelar Turno ==
+
+recep -> pest : Selecciona turno\ny presiona Cancelar
+pest -> db : cancelar_turno(id)
+note right: Valida transición:\nPendiente/Cancelado → Cancelado
+db -> sql : UPDATE turno\nSET estado = 'Cancelado'\nWHERE id = ?
+db -> pest : return Turno
+pest -> pest : refrescar_listado()
+pest -> recep : "Turno cancelado"
+
+@enduml

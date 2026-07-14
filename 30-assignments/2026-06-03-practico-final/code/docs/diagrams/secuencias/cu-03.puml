@@ -1,0 +1,19 @@
+@startuml
+skinparam backgroundColor #FEFEFE
+actor Usuario as user
+participant "PestaniaPacientes" as pest
+participant "Consultorio" as db
+database "SQLite" as sql
+
+user -> pest : Selecciona pestaña\n"Listado de Pacientes"
+pest -> db : listar_pacientes()
+db -> sql : SELECT dni, nombre, apellido,\ntelefono FROM paciente\nWHERE activo=1\nORDER BY apellido
+db -> pest : return list[Paciente]
+
+alt Hay pacientes
+  pest -> user : Muestra Treeview\ncon los datos
+else Sin pacientes
+  pest -> user : Muestra tabla vacía\ncon mensaje informativo
+end
+
+@enduml

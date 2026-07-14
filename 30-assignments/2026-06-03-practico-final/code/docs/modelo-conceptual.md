@@ -14,19 +14,14 @@ classDiagram
         +string direccion
         +string obraSocial
         +bool activo
-        +registrar()
-        +modificar()
     }
 
     class Turno {
         +int id
-        +date fecha
-        +time hora
+        +string fecha
+        +string hora
         +string motivo
         +string estado
-        +asignar()
-        +cancelar()
-        +confirmar()
     }
 
     class Odontologo {
@@ -41,24 +36,16 @@ classDiagram
 
     class HistoriaClinica {
         +int id
-        +date fecha
+        +string fecha
         +string diagnostico
         +string procedimiento
         +string observaciones
-        +registrar()
-    }
-
-    class Consultorio {
-        +string nombre
-        +string direccion
-        +string telefono
     }
 
     Paciente "1" --> "*" Turno : solicita
     Odontologo "1" --> "*" Turno : atiende
     Paciente "1" --> "*" HistoriaClinica : posee
     Odontologo "1" --> "*" HistoriaClinica : registra
-    Consultorio "1" --> "*" Turno : alberga
 ```
 
 ## Entidades
@@ -66,10 +53,9 @@ classDiagram
 | Entidad | Descripción |
 | :--- | :--- |
 | **Paciente** | Persona que recibe atención odontológica. Atributos demográficos y de contacto. |
-| **Turno** | Cita programada que vincula paciente, odontólogo, fecha, hora y consultorio. |
+| **Turno** | Cita programada que vincula paciente, odontólogo, fecha y hora. |
 | **Odontólogo** | Profesional que brinda la atención. Identificado por matrícula. |
 | **HistoriaClínica** | Registro cronológico de diagnósticos, procedimientos y observaciones por paciente. |
-| **Consultorio** | Establecimiento físico donde ocurren las atenciones. |
 
 ## Reglas de Relación
 
@@ -77,3 +63,5 @@ classDiagram
 - Un `Odontólogo` puede atender **muchos** `Turno`s; un `Turno` es atendido por **un** `Odontólogo`.
 - Un `Paciente` puede tener **muchas** entradas de `HistoriaClinica`; cada entrada pertenece a **un** `Paciente`.
 - Un `Odontólogo` puede registrar **muchas** entradas de `HistoriaClinica`; cada entrada es registrada por **un** `Odontólogo`.
+
+> **Nota:** La lógica de negocio (registrar, modificar, asignar, confirmar, cancelar) no pertenece a las entidades de dominio. Se implementa en el módulo `Consultorio` (facade) dentro del package `consultorio/`, que orquesta validaciones, repositorios y la máquina de estados de Turno.

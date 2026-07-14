@@ -1,0 +1,21 @@
+@startuml
+skinparam backgroundColor #FEFEFE
+actor Recepcionista as recep
+participant "PestaniaPacientes" as pest
+participant "DialogoPaciente" as dlg
+participant "Consultorio" as db
+database "SQLite" as sql
+
+recep -> pest : Selecciona paciente\ny presiona Modificar
+pest -> dlg : DialogoPaciente(parent,\ntitulo="Modificar", paciente)
+dlg -> recep : Muestra formulario\ncon datos actuales
+
+recep -> dlg : Modifica campos\ny presiona Guardar
+dlg -> pest : return resultado (dict)
+pest -> db : modificar_paciente(id, datos)
+db -> sql : UPDATE paciente SET ...\nWHERE id = ?
+db -> pest : return Paciente
+pest -> pest : refrescar_listado()
+pest -> recep : Muestra mensaje de éxito
+
+@enduml

@@ -1,0 +1,36 @@
+@startuml
+skinparam backgroundColor #FEFEFE
+skinparam state {
+  BackgroundColor #EEEEFF
+  BorderColor #5555AA
+  FontColor #333333
+}
+
+[*] --> Pendiente : Recepcionista asigna turno
+
+Pendiente --> Confirmado : Recepcionista confirma\n(paciente asistió)
+Pendiente --> Cancelado : Recepcionista cancela
+
+Confirmado --> Cancelado : Recepcionista cancela\n(por inasistencia)
+
+Cancelado --> [*]
+
+note right of Pendiente
+  Estado inicial del turno.
+  Requiere que el paciente tenga
+  teléfono registrado.
+end note
+
+note right of Confirmado
+  El turno fue asistido.
+  Puede registrarse la
+  historia clínica asociada.
+end note
+
+note right of Cancelado
+  Estado final del turno.
+  No se puede reasignar;
+  debe crearse uno nuevo.
+end note
+
+@enduml

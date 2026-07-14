@@ -4,6 +4,7 @@ title: Software Requirements Specification (SRS)
 date: 2026-06-08
 toc: true
 ---
+
 # Especificación de Requisitos de Software (SRS)
 
 **Proyecto:** Saca Muela — Sistema de Gestión Odontológica
@@ -83,7 +84,7 @@ Este documento está organizado en cuatro secciones principales: la introducció
 
 ### 2.1 Perspectiva del Producto
 
-El sistema es una aplicación de escritorio autónoma que opera con persistencia local (SQLite3). Sigue una arquitectura de dos capas separadas: capa de datos (`consultorio.py`) y capa de interfaz (`formulario_odontologico.py`). No depende de servicios externos ni de conexión a internet.
+El sistema es una aplicación de escritorio autónoma que opera con persistencia local (SQLite3). Sigue una arquitectura de dos capas separadas: capa de datos (`consultorio/` package) y capa de interfaz (`formulario_odontologico/` package). La conexión a la base de datos se inyecta desde el entry point (`main.py`). No depende de servicios externos ni de conexión a internet.
 
 ### 2.2 Funcionalidad del Producto
 
@@ -105,7 +106,7 @@ El sistema es una aplicación de escritorio autónoma que opera con persistencia
 - **Lenguaje:** Python 3.x
 - **Persistencia:** SQLite3 (prohibido el uso de servidores de bases de datos externos)
 - **Interfaz gráfica:** ttk (Tkinter themed widgets) con ttk.Notebook para pestañas
-- **Arquitectura:** Separación estricta en dos módulos: `consultorio.py` (capa de datos/negocio) y `formulario_odontologico.py` (capa de interfaz)
+- **Arquitectura:** Separación estricta en dos capas: `consultorio/` (capa de datos/negocio, package) y `formulario_odontologico/` (capa de interfaz, package). La conexión a SQLite se inyecta desde `main.py`.
 - **Plataforma:** Aplicación de escritorio (Windows/Linux)
 
 ### 2.5 Suposiciones y Dependencias
@@ -254,7 +255,7 @@ El sistema es una aplicación de escritorio autónoma que opera con persistencia
 | :--- | :--- |
 | **Nombre:** | Separación de capas |
 | **Características:** | La lógica de negocio y la interfaz de usuario deben residir en módulos independientes |
-| **Descripción:** | El módulo `consultorio.py` contiene toda la lógica de negocio y acceso a datos. El módulo `formulario_odontologico.py` contiene exclusivamente la interfaz gráfica. No debe haber código de interfaz en `consultorio.py` ni consultas SQL en `formulario_odontologico.py`. |
+| **Descripción:** | El package `consultorio/` contiene toda la lógica de negocio y acceso a datos. El package `formulario_odontologico/` contiene exclusivamente la interfaz gráfica. No debe haber código de interfaz en `consultorio/` ni consultas SQL en `formulario_odontologico/`. |
 | **Prioridad:** | Alta |
 
 | Identificación: | **RNF-05** |
@@ -277,40 +278,7 @@ El sistema es una aplicación de escritorio autónoma que opera con persistencia
 
 ### 4.1 Diagrama de Casos de Uso
 
-![Diagrama CU - Saca Muelas](diagrama-casos-de-uso.png)
-
-<details>
-<summary>Código PlantUML</summary>
-```plantuml
-@startuml
-left to right direction
-
-actor "Recepcionista" as recep
-actor "Odontólogo" as odon
-
-rectangle "Saca Muela" {
-    usecase "Registrar Paciente" as CU01
-    usecase "Buscar Paciente por DNI" as CU02
-    usecase "Listar Pacientes" as CU03
-    usecase "Modificar Paciente" as CU04
-    usecase "Eliminar Paciente" as CU05
-    usecase "Gestionar Turnos" as CU06
-    usecase "Consultar Historia Clínica" as CU07
-}
-
-recep --> CU01
-recep --> CU02
-recep --> CU03
-recep --> CU04
-recep --> CU05
-recep --> CU06
-recep --> CU07
-
-odon --> CU02
-odon --> CU03
-odon --> CU07
-@enduml
-</details>
+![Diagrama CU - Saca Muelas](diagrams/diagrama-casos-de-uso.svg)
 
 ### 4.2 Especificación de Casos de Uso
 

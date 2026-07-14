@@ -1,0 +1,19 @@
+@startuml
+skinparam backgroundColor #FEFEFE
+actor Usuario as user
+participant "PestaniaPacientes" as pest
+participant "Consultorio" as db
+database "SQLite" as sql
+
+user -> pest : Ingresa DNI y presiona Buscar
+pest -> db : buscar_paciente_por_dni(dni)
+db -> sql : SELECT * FROM paciente\nWHERE dni = ? AND activo=1
+db -> pest : return Paciente | None
+
+alt Paciente encontrado
+  pest -> user : Muestra datos del paciente
+else Paciente no encontrado
+  pest -> user : Muestra mensaje\n"Paciente no encontrado"
+end
+
+@enduml

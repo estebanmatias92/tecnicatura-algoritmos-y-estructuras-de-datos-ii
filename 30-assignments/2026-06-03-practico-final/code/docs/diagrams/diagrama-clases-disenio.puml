@@ -1,0 +1,168 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam backgroundColor #FEFEFE
+skinparam packageBorderColor #888888
+left to right direction
+
+package "Capa de Datos / Negocio\nconsultorio/ (package)" as data_layer #FFEEEE {
+
+  class Paciente {
+    +id: int
+    +dni: str
+    +nombre: str
+    +apellido: str
+    +telefono: str
+    +email: str
+    +direccion: str
+    +obra_social: str
+    +activo: bool
+  }
+
+  class Turno {
+    +id: int
+    +paciente_id: int
+    +odontologo_id: int
+    +fecha: str
+    +hora: str
+    +motivo: str
+    +estado: str
+    +paciente_nombre: str
+    +odontologo_nombre: str
+  }
+
+  class Odontologo {
+    +id: int
+    +matricula: str
+    +nombre: str
+    +apellido: str
+    +especialidad: str
+    +telefono: str
+    +email: str
+  }
+
+  class HistoriaClinica {
+    +id: int
+    +paciente_id: int
+    +odontologo_id: int
+    +fecha: str
+    +diagnostico: str
+    +procedimiento: str
+    +observaciones: str
+    +odontologo_nombre: str
+  }
+
+  class Consultorio {
+    +__init__(conexion: sqlite3.Connection)
+    +inicializar() : None
+    -- pacientes --
+    +registrar_paciente(datos: dict) : Paciente
+    +buscar_paciente_por_dni(dni: str) : Paciente | None
+    +listar_pacientes() : list[Paciente]
+    +modificar_paciente(id: int, datos: dict) : Paciente
+    +eliminar_paciente(id: int) : None
+    -- turnos --
+    +asignar_turno(paciente_id, odontologo_id, fecha, hora, motivo) : Turno
+    +listar_turnos() : list[Turno]
+    +confirmar_turno(id: int) : Turno
+    +cancelar_turno(id: int) : Turno
+    -- historia clinica --
+    +registrar_entrada_historia(paciente_id, odontologo_id, diag, proc, obs) : None
+    +listar_historia_clinica(paciente_id: int) : list[HistoriaClinica]
+    -- odontologos --
+    +listar_odontologos() : list[Odontologo]
+  }
+
+  class _EstadoTurno <<enum>> {
+    +PENDIENTE
+    +CONFIRMADO
+    +CANCELADO
+    +transicionar_a(destino: EstadoTurno) : EstadoTurno
+  }
+
+  class _Excepciones {
+    {static} ConsultorioError
+    {static} DNIExistenteError
+    {static} OdontologoInexistenteError
+    {static} TelefonoFaltanteError
+    {static} TurnoSuperpuestoError
+    {static} TransicionInvalidaError
+    {static} PacienteInactivoError
+  }
+
+  Consultorio ..> _EstadoTurno : usa
+  Consultorio ..> _Excepciones : lanza
+}
+
+package "Capa de Interfaz\nformulario_odontologico/ (package)" as ui_layer #EEEEFF {
+
+  class FormularioOdontologico {
+    -ventana: Tk
+    -notebook: ttk.Notebook
+    -consultorio: Consultorio
+    +ejecutar() : None
+  }
+
+  class PestaniaPacientes {
+    -tree: ttk.Treeview
+    -entry_dni: ttk.Entry
+    +_refrescar() : None
+    +_buscar() : None
+    +_nuevo() : None
+    +_modificar() : None
+    +_eliminar() : None
+  }
+
+  class PestaniaTurnos {
+    -tree: ttk.Treeview
+    +_refrescar() : None
+    +_asignar() : None
+    +_confirmar() : None
+    +_cancelar() : None
+  }
+
+  class PestaniaHistoriaClinica {
+    -tree: ttk.Treeview
+    -paciente_actual: int | None
+    +_cargar_historial() : None
+    +_registrar_entrada() : None
+  }
+
+  class DialogoPaciente {
+    -campos: dict[str, ttk.Entry]
+    +resultado: dict | None
+    +__init__(parent, titulo, paciente?)
+  }
+
+  class DialogoAsignarTurno {
+    -combo_paciente: ttk.Combobox
+    -combo_odontologo: ttk.Combobox
+    +resultado: dict | None
+    +__init__(parent, pacientes, odontologos)
+  }
+
+  class DialogoSeleccionOdontologo {
+    +resultado: int | None
+    +__init__(parent, odontologos)
+  }
+}
+
+FormularioOdontologico *--> "1" PestaniaPacientes
+FormularioOdontologico *--> "1" PestaniaTurnos
+FormularioOdontologico *--> "1" PestaniaHistoriaClinica
+FormularioOdontologico *--> "1" Consultorio
+
+PestaniaPacientes ..> Consultorio : usa
+PestaniaPacientes ..> DialogoPaciente : crea
+
+PestaniaTurnos ..> Consultorio : usa
+PestaniaTurnos ..> DialogoAsignarTurno : crea
+
+PestaniaHistoriaClinica ..> Consultorio : usa
+PestaniaHistoriaClinica ..> DialogoSeleccionOdontologo : crea
+
+Paciente "1" --> "*" Turno : solicita
+Odontologo "1" --> "*" Turno : atiende
+Paciente "1" --> "*" HistoriaClinica : posee
+Odontologo "1" --> "*" HistoriaClinica : registra
+
+@enduml

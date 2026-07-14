@@ -1,0 +1,30 @@
+@startuml
+skinparam Linetype polyline
+
+left to right direction
+
+actor "Recepcionista" as recep
+actor "Odontólogo" as odon
+
+rectangle "Saca Muela" {
+    usecase "Registrar Paciente" as CU01
+    usecase "Buscar Paciente por DNI" as CU02
+    usecase "Listar Pacientes" as CU03
+    usecase "Modificar Paciente" as CU04
+    usecase "Eliminar Paciente" as CU05
+    usecase "Gestionar Turnos" as CU06
+    usecase "Consultar Historia Clínica" as CU07
+}
+
+recep --> CU01
+recep --> CU02
+recep --> CU03
+recep --> CU04
+recep --> CU05
+recep --> CU06
+recep --> CU07
+
+odon --> CU02
+odon --> CU03
+odon --> CU07
+@enduml

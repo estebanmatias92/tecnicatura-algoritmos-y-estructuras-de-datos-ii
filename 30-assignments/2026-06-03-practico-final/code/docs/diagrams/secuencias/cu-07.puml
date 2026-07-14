@@ -1,0 +1,36 @@
+@startuml
+skinparam backgroundColor #FEFEFE
+actor Usuario as user
+participant "PestaniaHistoriaClinica" as pest
+participant "DialogoSeleccionOdontologo" as dlg
+participant "Consultorio" as db
+database "SQLite" as sql
+
+== Consultar Historia Clínica ==
+
+user -> pest : Selecciona paciente\ny presiona "Ver Historia"
+pest -> db : listar_historia_clinica(paciente_id)
+db -> sql : SELECT hc.*, o.nombre AS odontologo_nombre,\n  o.apellido AS odontologo_apellido\nFROM historia_clinica hc\nJOIN odontologo o\nON hc.odontologo_id = o.id\nWHERE hc.paciente_id = ?\nORDER BY hc.fecha DESC
+db -> pest : return list[HistoriaClinica]
+
+alt Con historial
+  pest -> user : Muestra Treeview cronológico
+else Sin historial
+  pest -> user : "El paciente no tiene\nentradas registradas"
+end
+
+== Registrar Nueva Entrada ==
+
+user -> pest : Completa diagnóstico,\nprocedimiento, observaciones\ny presiona "Registrar Entrada"
+pest -> dlg : DialogoSeleccionOdontologo(odontologos)
+dlg -> user : Combo para seleccionar\nodontólogo actuante
+user -> dlg : Selecciona odontólogo
+dlg -> pest : return odontologo_id (int)
+
+pest -> db : registrar_entrada_historia(\n  paciente_id, odontologo_id,\n  diagnostico, procedimiento, obs)
+db -> sql : INSERT INTO historia_clinica ...\nVALUES ...
+db -> pest : return None
+pest -> pest : refrescar_historial()
+pest -> user : "Entrada registrada"
+
+@enduml

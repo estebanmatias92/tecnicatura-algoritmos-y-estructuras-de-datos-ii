@@ -1,0 +1,23 @@
+@startuml
+skinparam backgroundColor #FEFEFE
+actor Recepcionista as recep
+participant "PestaniaPacientes" as pest
+participant "Consultorio" as db
+database "SQLite" as sql
+
+recep -> pest : Selecciona paciente\ny presiona Eliminar
+pest -> pest : Muestra diálogo\nde confirmación
+
+alt Usuario confirma
+  recep -> pest : Presiona "Sí, Eliminar"
+  pest -> db : eliminar_paciente(id)
+  db -> sql : UPDATE paciente\nSET activo = 0\nWHERE id = ?
+  db -> pest : return None
+  pest -> pest : refrescar_listado()
+  pest -> recep : Muestra "Paciente eliminado"
+else Usuario cancela
+  recep -> pest : Presiona "Cancelar"
+  pest -> recep : No realiza ninguna acción
+end
+
+@enduml
