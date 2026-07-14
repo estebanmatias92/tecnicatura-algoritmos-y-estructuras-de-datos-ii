@@ -29,6 +29,11 @@
             echo "Python : $(python3 --version)"
             echo "Tools  : black, ruff, pytest, plantuml, sqlite3"
             echo "Tkinter: $(python3 -c 'import tkinter; print("ok")')"
+
+            if [ ! -f "saca_muela.db" ]; then
+              echo "Seed: creando base de datos de prueba…"
+              PYTHONPATH=. python3 scripts/seed.py
+            fi
           '';
         };
       });
