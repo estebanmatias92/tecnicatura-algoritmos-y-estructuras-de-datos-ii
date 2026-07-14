@@ -16,6 +16,8 @@ class DialogoPaciente(tk.Toplevel):
         self._paciente = paciente
         self._construir_formulario()
         self._cargar_datos()
+        if self._paciente:
+            self._campos["dni"].config(state="readonly")
         self.wait_window()
 
     def _construir_formulario(self):
@@ -37,9 +39,6 @@ class DialogoPaciente(tk.Toplevel):
             entry.grid(row=fila, column=1, **pad)
             self._campos[clave] = entry
             fila += 1
-
-        if self._paciente:
-            self._campos["dni"].config(state="readonly")
 
         fila += 1
         frame_botones = ttk.Frame(self)
@@ -140,6 +139,7 @@ class DialogoSeleccionOdontologo(tk.Toplevel):
         )
         self.bind("<Return>", lambda e: self._aceptar())
         self.bind("<Escape>", lambda e: self.destroy())
+        self.wait_window()
 
     def _aceptar(self):
         if not self._combo.get():
