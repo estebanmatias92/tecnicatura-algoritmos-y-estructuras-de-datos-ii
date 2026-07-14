@@ -1,4 +1,5 @@
 .direnv/
+.venv/
 result
 *.db
 __pycache__/

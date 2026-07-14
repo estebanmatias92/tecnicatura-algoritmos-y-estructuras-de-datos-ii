@@ -4,21 +4,42 @@ Aplicación de escritorio para digitalizar la gestión de pacientes de un consul
 
 ## Stack Tecnológico
 
-- Python 3.14 (vía Nix flake)
+- Python 3.14+
 - SQLite3 3.53
 - ttk (Tkinter 8.6 themed widgets)
 - Black + Ruff (formato y linting)
 
 ## Entorno de Desarrollo
 
-Entorno reproducible vía Nix flakes + direnv.
+Dos alternativas para preparar el entorno:
+
+### Opción A: Nix flakes + direnv (reproducible)
 
 ```bash
 cd code/
 direnv allow      # o: nix develop
 ```
 
-Aporta: Python con soporte Tkinter, SQLite3, PlantUML, Black y Ruff.
+Aporta: Python con soporte Tkinter, SQLite3, PlantUML, Black y Ruff (todo versionado).
+
+### Opción B: Tradicional (virtualenv + pip)
+
+Requisitos previos del sistema operativo:
+
+- **Debian/Ubuntu:** `sudo apt install python3 python3-tk python3-venv`
+- **Arch Linux:** `sudo pacman -S python tk`
+- **Fedora:** `sudo dnf install python3 python3-tkinter`
+
+Puesta en marcha:
+
+```bash
+cd code/
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements-dev.txt
+```
+
+Aporta: Python con soporte Tkinter, Black, Ruff y pytest. SQLite3 viene incluido en la stdlib de Python.
 
 ## Arquitectura
 
