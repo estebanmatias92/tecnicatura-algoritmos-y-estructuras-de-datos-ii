@@ -1,6 +1,6 @@
 # Practico 07 — Patrones de Comportamiento (Strategy)
 
-> Algoritmos y Estructuras de Datos II — Unidad 04. Aplicación de navegación que calcula ruta según medio de transporte mediante el patrón **Strategy**.
+> Algoritmos y Estructuras de Datos II — Unidad 03. Aplicación de navegación que calcula ruta según medio de transporte mediante el patrón **Strategy**.
 
 El sistema implementa el patrón **Strategy** (GoF) para variar el algoritmo de navegación en tiempo de ejecución sin modificar la clase `Navigator`.
 
