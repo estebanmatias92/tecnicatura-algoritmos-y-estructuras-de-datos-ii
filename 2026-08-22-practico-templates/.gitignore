@@ -1,0 +1,7 @@
+obj/
+*.o
+templates_practico
+presupuesto_hotelero
+*.pdf
+*.swp
+*~
