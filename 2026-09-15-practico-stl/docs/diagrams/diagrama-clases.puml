@@ -1,0 +1,143 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam nodesep 80
+skinparam ranksep 60
+
+title Diagrama de Clases — Abstract Factory (Muebleria)
+
+' === PRODUCTOS ABSTRACTOS ===
+interface Chair <<Interface>> {
+  + {abstract} hasLegs(): bool
+  + {abstract} sitOn(): void
+  + {abstract} style(): string
+}
+
+interface Sofa <<Interface>> {
+  + {abstract} hasCushions(): bool
+  + {abstract} lieOn(): void
+  + {abstract} style(): string
+}
+
+interface CoffeeTable <<Interface>> {
+  + {abstract} hasSurface(): bool
+  + {abstract} placeOn(): void
+  + {abstract} style(): string
+}
+
+' === PRODUCTOS CONCRETOS — MODERN ===
+class ModernChair {
+  + hasLegs(): bool
+  + sitOn(): void
+  + style(): string
+}
+
+class ModernSofa {
+  + hasCushions(): bool
+  + lieOn(): void
+  + style(): string
+}
+
+class ModernCoffeeTable {
+  + hasSurface(): bool
+  + placeOn(): void
+  + style(): string
+}
+
+' === PRODUCTOS CONCRETOS — VICTORIAN ===
+class VictorianChair {
+  + hasLegs(): bool
+  + sitOn(): void
+  + style(): string
+}
+
+class VictorianSofa {
+  + hasCushions(): bool
+  + lieOn(): void
+  + style(): string
+}
+
+class VictorianCoffeeTable {
+  + hasSurface(): bool
+  + placeOn(): void
+  + style(): string
+}
+
+' === PRODUCTOS CONCRETOS — ARTDECO ===
+class ArtDecoChair {
+  + hasLegs(): bool
+  + sitOn(): void
+  + style(): string
+}
+
+class ArtDecoSofa {
+  + hasCushions(): bool
+  + lieOn(): void
+  + style(): string
+}
+
+class ArtDecoCoffeeTable {
+  + hasSurface(): bool
+  + placeOn(): void
+  + style(): string
+}
+
+' === FABRICA ABSTRACTA ===
+interface MuebleriaFactory <<Interface>> {
+  + {abstract} createChair(): Chair*
+  + {abstract} createSofa(): Sofa*
+  + {abstract} createCoffeeTable(): CoffeeTable*
+  + {abstract} factoryStyle(): string
+}
+
+' === FABRICAS CONCRETAS ===
+class ModernFactory {
+  + createChair(): Chair*
+  + createSofa(): Sofa*
+  + createCoffeeTable(): CoffeeTable*
+  + factoryStyle(): string
+}
+
+class VictorianFactory {
+  + createChair(): Chair*
+  + createSofa(): Sofa*
+  + createCoffeeTable(): CoffeeTable*
+  + factoryStyle(): string
+}
+
+class ArtDecoFactory {
+  + createChair(): Chair*
+  + createSofa(): Sofa*
+  + createCoffeeTable(): CoffeeTable*
+  + factoryStyle(): string
+}
+
+' === RELACIONES ===
+Chair <|.. ModernChair
+Chair <|.. VictorianChair
+Chair <|.. ArtDecoChair
+
+Sofa <|.. ModernSofa
+Sofa <|.. VictorianSofa
+Sofa <|.. ArtDecoSofa
+
+CoffeeTable <|.. ModernCoffeeTable
+CoffeeTable <|.. VictorianCoffeeTable
+CoffeeTable <|.. ArtDecoCoffeeTable
+
+MuebleriaFactory <|.. ModernFactory
+MuebleriaFactory <|.. VictorianFactory
+MuebleriaFactory <|.. ArtDecoFactory
+
+ModernFactory .left.> ModernChair : crea
+ModernFactory .left.> ModernSofa : crea
+ModernFactory .left.> ModernCoffeeTable : crea
+
+VictorianFactory .left.> VictorianChair : crea
+VictorianFactory .left.> VictorianSofa : crea
+VictorianFactory .left.> VictorianCoffeeTable : crea
+
+ArtDecoFactory .left.> ArtDecoChair : crea
+ArtDecoFactory .left.> ArtDecoSofa : crea
+ArtDecoFactory .left.> ArtDecoCoffeeTable : crea
+
+@enduml

@@ -1,0 +1,9 @@
+obj/
+*.o
+stl_vector
+stl_iterator
+stl_map
+stl_unordered_map
+*.pdf
+*.swp
+*~
