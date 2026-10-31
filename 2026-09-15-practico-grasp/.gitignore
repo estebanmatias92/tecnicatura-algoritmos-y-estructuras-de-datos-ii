@@ -1,0 +1,13 @@
+obj/
+calculadora_grasp
+*.o
+*.obj
+*.exe
+*.out
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+.task-state.json

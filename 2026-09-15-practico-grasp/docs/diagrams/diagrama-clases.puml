@@ -1,0 +1,38 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam monochrome false
+skinparam shadowing false
+
+class Calculadora {
+    + sumar(a: double, b: double): double
+    + restar(a: double, b: double): double
+    + multiplicar(a: double, b: double): double
+    + dividir(dividendo: double, divisor: double): double
+    + operar(operador: char, a: double, b: double): double
+}
+
+class Controlador {
+    - calculadora: Calculadora
+    + ejecutar(operador: char, a: double, b: double): string
+}
+
+class Consola {
+    + mostrar(mensaje: string): void
+    + leer(): string
+    + mostrarResultado(resultado: double): void
+    + mostrarError(mensaje: string): void
+}
+
+class main {
+    + main(): int
+}
+
+Consola --> Controlador : coordina operacion
+Controlador --> Calculadora : delega calculo (Information Expert)
+main --> Consola : crea y usa
+main --> Controlador : crea y usa
+
+note right of Controlador : GRASP Controller:\nintermediario UI <-> logica
+note right of Calculadora : GRASP Information Expert:\nconoce operandos, hace el calculo
+
+@enduml
