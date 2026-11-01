@@ -1,0 +1,71 @@
+<mxfile host="65bd71144e">
+    <diagram id="Jq3w8ab3Zrn4gC5YYRa_" name="ClassDiagram1">
+        <mxGraphModel dx="847" dy="408" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram name="Packages" id="DTABSbg18Ajq2ClN413e">
+        <mxGraphModel dx="1674" dy="1577" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="1">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="d555a39267f8490e9bb01963dcffdb2c" value="" style="shape=folder;tabWidth=80;tabHeight=30;tabPosition=left;boundedLbl=1;html=1;strokeColor=#555555;strokeWidth=2;shadow=1fillColor=#F2F2F2;" parent="1" vertex="1">
+                    <mxGeometry width="320" height="220" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram name="" id="K4tGIlhBwXBaRz6KlU2l">
+        <mxGraphModel dx="1674" dy="1577" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="1">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="100258c30989471485fd9c6886d15332" value="Mother" style="swimlane;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;html=1;strokeColor=#555555;strokeWidth=2;shadow=1fillColor=#F2F2F2;" parent="1" vertex="1">
+                    <mxGeometry x="-70" y="-50" width="322" height="118" as="geometry"/>
+                </mxCell>
+                <mxCell id="a74dd343440b544478064f1d38fa0c0ad847" value=" mySon: std::weak_ptr&lt;class Son&gt;" style="text;portConstraint=eastwest;overflow=hidden;rotatable=0;" parent="100258c30989471485fd9c6886d15332" vertex="1">
+                    <mxGeometry y="23" width="322" height="19" as="geometry"/>
+                </mxCell>
+                <mxCell id="adfa62438393e44d9b9713b80fcad9de0855" value=" myDaughter: std::weak_ptr&lt;class Daughter&gt;" style="text;portConstraint=eastwest;overflow=hidden;rotatable=0;" parent="100258c30989471485fd9c6886d15332" vertex="1">
+                    <mxGeometry y="42" width="322" height="19" as="geometry"/>
+                </mxCell>
+                <mxCell id="o42d83e735b0d4069b9fe8fe750ad6a5e861" value="+ «create» Mother ()" style="text;portConstraint=eastwest;overflow=hidden;rotatable=0;" parent="100258c30989471485fd9c6886d15332" vertex="1">
+                    <mxGeometry y="61" width="322" height="19" as="geometry"/>
+                </mxCell>
+                <mxCell id="oa0015a60a4e34c5a8f581774e2fb904e863" value="+ setSon (s : const std::shared_ptr&lt;Son&gt;)" style="text;portConstraint=eastwest;overflow=hidden;rotatable=0;" parent="100258c30989471485fd9c6886d15332" vertex="1">
+                    <mxGeometry y="80" width="322" height="19" as="geometry"/>
+                </mxCell>
+                <mxCell id="of2c7fb3d4b0e4ee4a1d8890cbe98663f870" value="+ setDaughter (d : const std::shared_ptr&lt;Daughter&gt;)" style="text;portConstraint=eastwest;overflow=hidden;rotatable=0;" parent="100258c30989471485fd9c6886d15332" vertex="1">
+                    <mxGeometry y="99" width="322" height="19" as="geometry"/>
+                </mxCell>
+                <mxCell id="fcebf7468d3647729956f691e5bd42cd" value="Son" style="swimlane;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;html=1;strokeColor=#555555;strokeWidth=2;shadow=1fillColor=#F2F2F2;" parent="1" vertex="1">
+                    <mxGeometry x="280" y="110" width="281" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="a77d267db233f4d1abd1b123a921a499a870" value="+ myMother: std::shared_ptr&lt;const Mother&gt;" style="text;portConstraint=eastwest;overflow=hidden;rotatable=0;" parent="fcebf7468d3647729956f691e5bd42cd" vertex="1">
+                    <mxGeometry y="23" width="281" height="19" as="geometry"/>
+                </mxCell>
+                <mxCell id="ode3342697ba74a209e08e66a5cb8acaa870" value="+ «create» Son (m : std::shared_ptr&lt;Mother&gt;)" style="text;portConstraint=eastwest;overflow=hidden;rotatable=0;" parent="fcebf7468d3647729956f691e5bd42cd" vertex="1">
+                    <mxGeometry y="42" width="281" height="19" as="geometry"/>
+                </mxCell>
+                <mxCell id="oc796f96f5996446f8ac43bb2ab97e06a870" value="+ «create» Son ()" style="text;portConstraint=eastwest;overflow=hidden;rotatable=0;" parent="fcebf7468d3647729956f691e5bd42cd" vertex="1">
+                    <mxGeometry y="61" width="281" height="19" as="geometry"/>
+                </mxCell>
+                <mxCell id="b1deb526bf6f4e3ab06bc871ce8dc02d" value="Daughter" style="swimlane;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;html=1;strokeColor=#555555;strokeWidth=2;shadow=1fillColor=#F2F2F2;" parent="1" vertex="1">
+                    <mxGeometry x="363.5" y="-60" width="314" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="a8c6ac6b1ec41414e8c8dadea3eecb7ac870" value="+ myMother: std::shared_ptr&lt;const Mother&gt;" style="text;portConstraint=eastwest;overflow=hidden;rotatable=0;" parent="b1deb526bf6f4e3ab06bc871ce8dc02d" vertex="1">
+                    <mxGeometry y="23" width="314" height="19" as="geometry"/>
+                </mxCell>
+                <mxCell id="o5f4e3b90f2fe4b4080b00c7794d84e62870" value="+ «create» Daughter (m : std::shared_ptr&lt;Mother&gt;)" style="text;portConstraint=eastwest;overflow=hidden;rotatable=0;" parent="b1deb526bf6f4e3ab06bc871ce8dc02d" vertex="1">
+                    <mxGeometry y="42" width="314" height="19" as="geometry"/>
+                </mxCell>
+                <mxCell id="o53f82b6f05354f18bdc631392bd2df71870" value="+ «create» Daughter ()" style="text;portConstraint=eastwest;overflow=hidden;rotatable=0;" parent="b1deb526bf6f4e3ab06bc871ce8dc02d" vertex="1">
+                    <mxGeometry y="61" width="314" height="19" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
