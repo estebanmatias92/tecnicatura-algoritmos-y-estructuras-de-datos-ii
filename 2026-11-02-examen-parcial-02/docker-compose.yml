@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  mariadb:
+    image: mariadb:10.11
+    container_name: parcial02-mariadb
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:-parcial02-root}
+      MARIADB_DATABASE: ${MARIADB_DATABASE:-parcial02}
+      MARIADB_USER: ${MARIADB_USER:-parcial02}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD:-parcial02-pass}
+    ports:
+      - "${MARIADB_PORT:-3306}:3306"
+    volumes:
+      - parcial02-mariadb-data:/var/lib/mysql
+      - ./db/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  parcial02-mariadb-data:
