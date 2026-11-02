@@ -65,3 +65,78 @@ enunciado dice "en diagrama **o** código", y tener ambos es más fuerte que uno
   arqueología. Ese archivo es parte de la decisión, no un extra.
 - Los diagramas `.svg` se commitean renderizados para que se vean al navegar el
   repositorio.
+
+## Enmienda 2026-11-02 — alcance del genérico, forma del "antes" y sexto commit
+
+La fase de diseño conservó la decisión de fondo (historial lineal, tags, un commit por
+principio) y precisó cuatro cosas que la tabla de defectos dejaba implícitas. Sin esta
+enmienda, dos de los cinco refactorings no serían implementables.
+
+**1. El defecto #4 vive del lado del almacenamiento y de la interfaz, no del SQL.** Un
+template no puede esconder tres sentencias SQL distintas; el genérico es el contrato, y
+cada entidad tiene su adaptador:
+
+```cpp
+template <class T, class K>
+class Repository {                       // find / all / add
+public:
+    virtual ~Repository() = default;
+    virtual std::optional<T> find(const K& key) const = 0;
+    virtual std::vector<T> all() const = 0;
+    virtual void add(const T& entity) = 0;
+};
+
+template <class T, class K>
+class MutableRepository : public Repository<T, K> {   // + update / remove
+public:
+    virtual void update(const T& entity) = 0;
+    virtual void remove(const K& key) = 0;
+};
+```
+
+`InMemoryRepository<T, K>` implementa las dos interfaces con un extractor de clave;
+`MariaDbSupplierRepository`, `MariaDbArticleRepository` y
+`MariaDbPurchaseOrderRepository` implementan la de su entidad. El OCP se demuestra
+agregando los repositorios de `Article` y de `PurchaseOrder` **sin tocar el template ni
+`InMemoryRepository`**. La corrección de fondo es que "las tres entidades usan
+`Repository<T>` sin modificarse" describe el **contrato**, no la implementación SQL.
+Detalle en la enmienda de `ADR-0004`.
+
+**2. El "antes" es una sola clase `App` con los streams inyectados.** Sin un borde de
+comportamiento estable no hay dónde agarrar la suite que `ADR-0005` exige escribir
+sobre el "antes": si la lógica vive dentro de `main`, los tests solo pueden invocar
+`main()`. `App(std::istream&, std::ostream&)` es ese borde, y **no es uno de los cinco
+refactorings**: se documenta como punto de partida en `docs/refactoring.md`, porque
+permanece idéntico antes y después. Dentro de `App` conviven el menú, el almacenamiento,
+la validación y el formateo, con tres bloques de búsqueda por clave copiados a mano (el
+defecto #4 en forma embrionaria) y el formateo de pedidos en su propio `showOrders()`
+(el defecto #5). `main` solo construye `App`.
+
+**3. El "antes" es 100 % en memoria y MariaDB entra como sexto commit.** El propio
+defecto #3 dice que el defecto es que el servicio instancia
+`new InMemorySupplierRepository()`. Si el "antes" hablara con MariaDB, las unitarias de
+servicio que `ADR-0005` exige exigirían Docker y el refactoring de DIP no tendría un
+puerto que crear. Además la consigna habilita lo hardcodeado y RN-016 es una ampliación
+posterior. La persistencia necesita la interfaz que produce DIP, así que va **después**
+de ese commit:
+
+| # | Commit | Principio / motivo | Defecto que corrige |
+|---|--------|--------------------|---------------------|
+| 0 | `test: suite sobre la versión antes` (incluida en el tag) | Red de seguridad | — |
+| 1 | `refactor(raii): catálogo y proveedores con unique_ptr` | RAII | #1 |
+| 2 | `refactor(srp): separar consola, repositorios y servicios` | SRP / GRASP Controller | #2 |
+| 3 | `refactor(dip): inyectar repositorios por constructor` | DIP / IoC | #3 |
+| 4 | `refactor(ocp): unificar almacenamiento en Repository<T,K>` | OCP | #4 |
+| 5 | `refactor(grasp): mover la impresión de pedidos a PurchaseOrder` | Information Expert | #5 |
+| 6 | `feat(persistence): adaptadores MariaDB, compose y seed` | Adaptador de persistencia | — |
+
+El commit 6 no responde a un principio: es la implementación del adaptador que DIP hizo
+posible. Se separa para que los cinco commits de refactoring sigan siendo atribuibles a
+un principio cada uno. `parcial02-final` se crea después del commit 6.
+
+**4. El dominio es idéntico en las dos versiones.** `Article`, `Supplier`,
+`PurchaseOrder`, `Quantity`, `Money`, `Date`, `Cuit` y `OrderNumber` no cambian: el
+refactoring altera estructura, no modelo ni comportamiento. Por eso ninguna expectativa
+de test cambia entre `parcial02-antes` y `parcial02-final`, y los dos diagramas de clases
+difieren solo en el cableado.
+

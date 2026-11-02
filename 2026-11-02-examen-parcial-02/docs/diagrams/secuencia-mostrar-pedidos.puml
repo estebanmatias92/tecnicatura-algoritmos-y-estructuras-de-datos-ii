@@ -1,0 +1,69 @@
+@startuml secuencia-mostrar-pedidos
+title Secuencia — OP-07 Mostrar pedidos (RN-007, BR-012, AC-007, AC-015)
+
+skinparam shadowing false
+skinparam sequenceMessageAlign left
+hide footbox
+
+actor Operador
+participant "Console" as C
+participant "PurchaseOrderService" as S
+participant "SupplierRepository" as SR
+participant "PurchaseOrderRepository" as PR
+participant "PurchaseOrder" as PO
+participant "Article" as A
+
+Operador -> C : 7
+activate C
+
+C -> S : ordersBySupplier()
+activate S
+
+S -> SR : all()
+activate SR
+SR --> S : std::vector<Supplier>
+deactivate SR
+
+S -> PR : all()
+activate PR
+PR --> S : std::vector<PurchaseOrder>
+deactivate PR
+
+S -> S : agrupar por proveedor\n(CUIT ascendente, número ascendente)
+note right of S
+  Un proveedor sin pedidos no entra
+  en el resultado: no se imprime.
+  Nada se persiste ni se recalcula
+  fuera del momento de mostrar.
+end note
+
+S --> C : std::vector<SupplierOrders>
+deactivate S
+
+alt hay pedidos
+  loop cada SupplierOrders
+    C -> C : escribe MSG-402
+    loop cada pedido del grupo
+      C -> PO : out << *pedido\n(operator<<)
+      activate PO
+      loop cada ítem, en orden de carga
+        PO -> A : unitPrice()
+        activate A
+        A --> PO : Money
+        deactivate A
+        PO -> PO : subtotal = unitPrice x quantity\n(BR-012: se calcula, no se guarda)
+        PO -> C : escribe MSG-404
+      end
+      PO -> PO : total = suma de subtotales
+      PO -> C : escribe MSG-405
+      deactivate PO
+    end
+  end
+else no hay pedidos
+  C -> C : escribe MSG-406
+end
+
+C --> Operador : menú principal
+deactivate C
+
+@enduml

@@ -1,0 +1,163 @@
+@startuml clases-despues
+title Clases — versión "después" (tag `parcial02-final`)
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam packageStyle rectangle
+skinparam nodesep 30
+skinparam ranksep 45
+skinparam linetype ortho
+
+package "dominio\n(los value types no cambian: ver clases-antes)" as dominio {
+  class Supplier {
+    - cuit : Cuit
+    - businessName : std::string
+  }
+
+  class Article {
+    - code : std::string
+    - description : std::string
+    - unitPrice : Money
+  }
+
+  class PurchaseOrder {
+    - number : OrderNumber
+    - supplier : const Supplier*
+    - createdAt : Date
+    - expectedDelivery : Date
+    - items : std::vector<std::pair<const Article*, Quantity>>
+    + total() : Money
+  }
+
+  class SupplierOrders <<read model>> {
+    + supplier : const Supplier*
+    + orders : std::vector<const PurchaseOrder*>
+  }
+}
+
+package "aplicación" as aplicacion {
+  class SupplierService {
+    + add(const Cuit&, const std::string&) : void
+    + update(const Cuit&, const std::string&) : void
+    + remove(const Cuit&) : void
+    + list() : std::vector<Supplier>
+  }
+
+  class PurchaseOrderService {
+    + create(const Cuit&, const Date&, const Items&) : PurchaseOrder
+    + ordersBySupplier() : std::vector<SupplierOrders>
+  }
+
+  class Clock <<port>> {
+    + now() : Date
+  }
+}
+
+package "adaptadores" as adaptadores {
+  interface Repository <<template T, K>> {
+    + find(const K&) : std::optional<T>
+    + all() : std::vector<T>
+    + add(const T&) : void
+  }
+
+  interface MutableRepository <<template T, K>> {
+    + update(const T&) : void
+    + remove(const K&) : void
+  }
+
+  interface OrderNumberSequence <<port>> {
+    + nextNumber() : OrderNumber
+  }
+
+  class InMemoryRepository <<template T, K>> {
+    - items : std::vector<T>
+    - keyOf : std::function<K(const T&)>
+  }
+
+  class MariaDbConnection <<RAII>>
+
+  class MariaDbSupplierRepository
+  class MariaDbArticleRepository
+  class MariaDbPurchaseOrderRepository
+
+  class Console {
+    - in : std::istream&
+    - out : std::ostream&
+    + run() : int
+    + createArticle() : void
+    + createSupplier() : void
+    + listSuppliers() : void
+    + updateSupplier() : void
+    + removeSupplier() : void
+    + createOrder() : void
+    + showOrders() : void
+  }
+
+  class MessageCatalog {
+    + translate(const DomainError&) : std::string
+  }
+}
+
+MutableRepository --|> Repository
+InMemoryRepository ..|> MutableRepository
+MariaDbSupplierRepository ..|> MutableRepository
+MariaDbArticleRepository ..|> Repository
+MariaDbPurchaseOrderRepository ..|> Repository
+MariaDbPurchaseOrderRepository ..|> OrderNumberSequence
+MariaDbPurchaseOrderRepository --> MariaDbConnection : usa
+
+Console --> SupplierService
+Console --> PurchaseOrderService
+Console ..> MessageCatalog
+
+SupplierService ..> MutableRepository : Supplier
+PurchaseOrderService ..> Repository : Article, PurchaseOrder
+PurchaseOrderService ..> OrderNumberSequence
+PurchaseOrderService ..> Clock
+PurchaseOrderService ..> SupplierOrders
+
+SupplierOrders o-- Supplier
+SupplierOrders o-- PurchaseOrder
+PurchaseOrder --> Supplier
+PurchaseOrder --> Article
+
+note bottom of PurchaseOrderService #F5F5F5
+  `Items` = `std::vector<std::pair<std::string, unsigned>>`
+  (código de artículo y cantidad tal como los tipea el operador;
+  el servicio resuelve los códigos contra el catálogo).
+end note
+
+note right of Repository #E8F0FE
+  **OCP.** Almacenamiento y búsqueda por clave
+  existen **una vez**. Agregar el repositorio de
+  `Article` o el de `PurchaseOrder` no modifica ni
+  el template ni `InMemoryRepository`.
+end note
+
+note right of MutableRepository #E8F0FE
+  **ISP.** Solo `Supplier` recibe `update` y `remove`.
+  `Article` y `PurchaseOrder` quedan cerrados a
+  modificación por tipo, no por convención (RN-011).
+end note
+
+note bottom of Console #E8F0FE
+  **DIP / IoC.** Recibe streams, servicios e interfaces por
+  constructor; `main` es el único que conoce las
+  implementaciones concretas y arma el cableado.
+  `InMemoryRepository` e `InMemoryOrderNumberSequence` son
+  los dobles de prueba (ADR-0005).
+end note
+
+note right of MariaDbConnection #E8F0FE
+  **RAII.** Cierra la conexión en el destructor: no hay
+  `mysql_close` suelto. Los tres adaptadores usan sentencias
+  preparadas y una transacción por operación (ADR-0004).
+end note
+
+note left of PurchaseOrder #E8F4EA
+  **Information Expert.**
+  `operator<<(std::ostream&, const PurchaseOrder&)` vive
+  junto al objeto que conoce cantidad, precio y total.
+end note
+
+@enduml

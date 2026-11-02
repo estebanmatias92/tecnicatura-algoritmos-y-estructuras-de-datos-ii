@@ -27,7 +27,11 @@
 | Término (código) | Término en la consigna | Definición |
 |------------------|------------------------|------------|
 | `Console` | Consola | Interfaz de usuario: lee opciones y escribe resultados por terminal. Recibe sus streams por constructor y no conoce reglas de negocio ni almacenamiento. |
-| `Repository` | Repositorio | Interfaz que guarda y recupera entidades, ocultando si el almacenamiento es memoria o MariaDB. |
+| `Repository` | Repositorio | Interfaz **genérica** (`Repository<T, K>`) que guarda y recupera entidades por clave, ocultando si el almacenamiento es memoria o MariaDB. `MutableRepository<T, K>` es la variante que además modifica y elimina. |
+| `SupplierOrders` | — | Vista de lectura que agrupa los pedidos de un proveedor para mostrarlos (RN-007). No es una entidad del dominio: se arma en cada consulta y no se persiste. |
+| `OrderNumberSequence` | — | Puerto que entrega el siguiente `OrderNumber` **antes** de persistir el pedido. Lo implementan el repositorio MariaDB y un doble en memoria. |
+| `Clock` | — | Puerto que devuelve la fecha del sistema. Se inyecta para que las pruebas de fecha no dependan del día en que corren. |
+| `MessageCatalog` | — | Catálogo de textos en español: traduce un `DomainError` a la línea `MSG-###` que ve el operador. |
 | `Service` | Servicio | Objeto que coordina las operaciones del sistema (crear un `Supplier`, armar un `PurchaseOrder`) y aplica las reglas de negocio. |
 | `Persistence` | Persistencia | Almacenamiento durable en MariaDB. En esta versión aplica a `Supplier`; `Article` y `PurchaseOrder` se leen del seed. |
 | `Docker` | — | Plataforma que sirve el contenedor de MariaDB con su esquema y seed. |
@@ -45,5 +49,6 @@
 | `Provider`, `Vendor` | `Supplier` | Un solo nombre para la entidad. |
 | `Line`, `LineItem`, `Detail`, `OrderLine` | *(ninguno)* | **No existe una entidad de línea.** El artículo y su cantidad se guardan como un par dentro del pedido. Ver `docs/adr/0002-modelo-de-pedido.md`. |
 | `Price` suelto, `float`, `double` para dinero | `Money` / `UnitPrice` | El dinero en punto flotante acumula error de redondeo; `Money` en centavos lo hace imposible. |
+| `Result`, `expected`, código de error devuelto | *(ninguno)* | El dominio rechaza con excepciones tipadas: los value types validan en el constructor y no pueden devolver un valor alternativo (`ADR-0006`). |
 | `Customer` | — | No existe: la empresa es la compradora, no hay clientes en el modelo. |
 | `Stock`, `Inventory` | — | Fuera de alcance, ver `registro-necesidades.md`. |

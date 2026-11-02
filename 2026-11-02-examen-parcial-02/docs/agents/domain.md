@@ -8,7 +8,8 @@ How the engineering skills should consume this project's domain documentation wh
 - **`docs/registro-necesidades.md`**: the functional (`RN-###`) and non-functional (`RNF-###`) requirements, plus the explicit out-of-scope list. Cite a requirement ID when a change traces to one.
 - **`docs/reglas-de-negocio.md`**: the business rules (`BR-###`), each traced to its `RN-###` and to where it is enforced.
 - **`docs/criterios-de-aceptacion.md`**: the Given/When/Then acceptance criteria (`AC-###`) per requirement; this is the source the test phase hangs from.
-- **`docs/adr/`**: read ADRs that touch the area you're about to work in. ADR-0001 covers how the before/after refactoring is demonstrated; ADR-0002 covers the purchase order model; ADR-0003 the app type and stack; ADR-0004 the MariaDB persistence; ADR-0005 the test strategy.
+- **`docs/adr/`**: read ADRs that touch the area you're about to work in. ADR-0001 covers how the before/after refactoring is demonstrated; ADR-0002 covers the purchase order model; ADR-0003 the app type and stack; ADR-0004 the MariaDB persistence; ADR-0005 the test strategy; ADR-0006 the error handling.
+- **`docs/especificacion-funcional.md`**: the menu, the contract per operation, the `MSG-###` message catalog and the exact output format. Integration tests assert those texts, so treat message IDs as stable identifiers.
 
 This project follows the course convention rather than the generic `GLOSSARY.md` layout: sibling practices use `docs/glosario-de-dominio.md` and `docs/registro-necesidades.md`, so new docs keep the same names and stay navigable next to them.
 
@@ -36,6 +37,7 @@ Single-context project (no `GLOSSARY-MAP.md` here, and no monorepo signals):
     ├── registro-necesidades.md      ← RN / RNF / fuera de alcance
     ├── reglas-de-negocio.md         ← BR trazadas a RN
     ├── criterios-de-aceptacion.md   ← AC en Given/When/Then por RN
+    ├── especificacion-funcional.md  ← menú, contrato por operación, catálogo MSG
     ├── refactoring.md               ← índice de la demostración antes/después
     ├── adr/                         ← decisiones con alternativas descartadas
     └── diagrams/                    ← *.puml versionados + *.svg renderizados

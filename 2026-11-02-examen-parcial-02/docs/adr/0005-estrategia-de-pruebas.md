@@ -69,3 +69,48 @@ beneficio (coincide con ADR-0003).
   consola es posible sin tocar stdin.
 - El umbral de cobertura se verifica en un target aparte (`make coverage`), no en
   `make test`, para que el ciclo corto siga siendo corto.
+
+## Enmienda 2026-11-02 — dónde se agarra la suite y qué assertea cada capa
+
+La decisión de fondo no cambia (tres capas, suite escrita sobre el "antes", `make test`
+verde en cada commit). La fase de diseño resolvió la restricción que este ADR dejaba
+abierta: **una suite no se puede escribir sobre código que solo existe dentro de
+`main`.**
+
+**1. El "antes" tiene un borde de comportamiento estable.** La versión inicial es una
+sola clase `App(std::istream&, std::ostream&)` que concentra menú, almacenamiento,
+validación y formateo (ADR-0001, enmienda). Ese constructor es el único punto de
+inyección del "antes" y **no es un refactoring**: permanece igual después. Los tests
+escriben un `istringstream` con el guion de teclas y leen el `ostringstream`; nunca
+tocan `stdin`, nunca dependen de una estructura interna.
+
+**2. Los tests fijan comportamiento observable, no estructura.** Ninguna prueba nombra
+`App`, `Console`, `SupplierService` ni un repositorio concreto en su *aserción*: nombra
+mensajes `MSG-###` del catálogo de `docs/especificacion-funcional.md`. Así los cinco
+refactorings pueden mover código de clase sin tocar una sola expectativa. Es la
+condición que hace creíble la regla de oro: si un commit necesitara cambiar una
+expectativa, no sería un refactoring.
+
+Las únicas pruebas que sí nombran tipos son las de **value types** (`Quantity`, `Cuit`,
+`Money`, `Date`), que no cambian en ningún commit, y las de **servicio**, que nombran la
+excepción esperada (`ValidationError`, `NotFoundError`, `ConflictError`, `ADR-0006`).
+
+**3. Qué se assertea en cada capa:**
+
+| Capa | Aserción | No assertea |
+|------|----------|-------------|
+| Unitaria de dominio | Se construye o lanza; el tipo de excepción y el `ErrorCode` | Texto en español |
+| Unitaria de servicio | Tipo de excepción, `ErrorCode` y estado del repositorio después | Texto en español |
+| Integración de `Console` | Las líneas `MSG-###` como **subcadenas** de la salida, y el código de salida | La pantalla completa: los prompts no se repiten en la salida y el teclado no se hace eco |
+| Integración de MariaDB | El adaptador contra un contenedor real | Nada de la interfaz |
+
+**4. Las fechas se prueban con reloj inyectado.** AC-013 y AC-014 dependen de "hoy".
+`PurchaseOrderService` recibe un `Clock` (`std::function<Date()>`, por defecto
+`Date::today`), así que una prueba puede fijar el día y assertear `createdAt` y el
+rechazo de BR-011 sin depender de la fecha en que corre.
+
+**5. La suite viaja con los seis commits.** Se escribe antes del tag `parcial02-antes`,
+sobre `App` en memoria, y sigue verde hasta `parcial02-final`. El commit 6
+(`feat(persistence)`) agrega la capa de integración de MariaDB sin cambiar ninguna
+prueba existente: eso es exactamente lo que DIP compró.
+

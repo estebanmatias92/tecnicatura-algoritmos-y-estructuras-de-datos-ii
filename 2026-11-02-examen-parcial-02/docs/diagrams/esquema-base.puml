@@ -1,0 +1,76 @@
+@startuml esquema-base
+title Esquema relacional — MariaDB (db/init/01-schema.sql)
+
+skinparam shadowing false
+
+entity "articles" as articles {
+  * code : VARCHAR(20) <<PK>>
+  --
+  description : VARCHAR(200)
+  unit_price_cents : BIGINT
+}
+
+entity "suppliers" as suppliers {
+  * cuit : CHAR(11) <<PK>>
+  --
+  business_name : VARCHAR(120)
+}
+
+entity "purchase_orders" as orders {
+  * number : INT UNSIGNED <<PK>>
+  --
+  supplier_cuit : CHAR(11) <<FK>>
+  created_at : DATE
+  expected_delivery : DATE
+}
+
+entity "purchase_order_items" as items {
+  * order_number : INT UNSIGNED <<PK, FK>>
+  * article_code : VARCHAR(20) <<PK, FK>>
+  --
+  quantity : INT UNSIGNED
+  position : SMALLINT UNSIGNED
+}
+
+suppliers ||--o{ orders : "recibe"
+orders ||--|{ items : "contiene"
+articles ||--o{ items : "aparece en"
+
+note right of suppliers #E8F0FE
+  **BR-004** — el CUIT es la clave: 11 dígitos, único.
+  Se guarda sin guiones, igual que se ingresa.
+end note
+
+note right of articles #E8F0FE
+  **BR-002 / BR-003** — código único y no vacío;
+  precio en centavos (`BIGINT`), nunca `DOUBLE`.
+  `CHECK (unit_price_cents > 0)`.
+end note
+
+note bottom of orders #E8F0FE
+  **BR-011** — `CHECK (expected_delivery >= created_at)`.
+  ..
+  **BR-010** — el número lo asigna la aplicación antes del insert
+  (`OrderNumberSequence`), no `AUTO_INCREMENT`: el agregado necesita
+  su número para validarse. El seed inserta 1..3 y el siguiente es 4.
+end note
+
+note bottom of items #E8F4EA
+  **BR-008** — la clave primaria `(order_number, article_code)` hace
+  imposible cargar el mismo artículo dos veces en un pedido.
+  ..
+  **BR-001** — `CHECK (quantity > 0)`.
+  ..
+  `position` preserva el orden de carga que exige RN-007.
+  ..
+  Es una **tabla de unión**, no una entidad de línea: ADR-0002 sigue
+  vigente y el dominio no gana un `OrderLine`.
+end note
+
+note top of orders #FFF2CC
+  Solo `suppliers` se modifica y se elimina desde la aplicación.
+  `purchase_orders` es *append-only* y `articles` es de solo lectura:
+  el seed es su única fuente (RN-011, RN-018).
+end note
+
+@enduml

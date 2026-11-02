@@ -1,0 +1,126 @@
+@startuml clases-antes
+title Clases — versión "antes" (tag `parcial02-antes`)
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam packageStyle rectangle
+
+package "dominio" {
+  class Article {
+    - code : std::string
+    - description : std::string
+    - unitPrice : Money
+  }
+
+  class Supplier {
+    - cuit : Cuit
+    - businessName : std::string
+  }
+
+  class PurchaseOrder {
+    - number : OrderNumber
+    - supplier : const Supplier*
+    - createdAt : Date
+    - expectedDelivery : Date
+    - items : std::vector<std::pair<const Article*, Quantity>>
+    + total() : Money
+  }
+
+  class Quantity <<value type>> {
+    + Quantity(unsigned)
+    + value() : unsigned
+  }
+
+  class Money <<value type>> {
+    + Money(std::int64_t cents)
+    + cents() : std::int64_t
+  }
+
+  class Date <<value type>> {
+    + Date(int year, int month, int day)
+    + Date::today() : Date
+  }
+
+  class Cuit <<value type>> {
+    + Cuit(std::string digits)
+  }
+
+  class OrderNumber <<value type>> {
+    + OrderNumber(unsigned value)
+  }
+}
+
+package "aplicación" {
+  class App <<God class>> {
+    - in : std::istream&
+    - out : std::ostream&
+    - suppliers : std::vector<Supplier*>
+    - articles : std::vector<Article*>
+    - orders : std::vector<PurchaseOrder*>
+    - nextOrderNumber : unsigned
+    + App(std::istream& in, std::ostream& out)
+    + run() : int
+    - showMenu() : void
+    - addArticle() : void
+    - addSupplier() : void
+    - listSuppliers() : void
+    - updateSupplier() : void
+    - removeSupplier() : void
+    - createOrder() : void
+    - showOrders() : void
+    - findSupplier(const Cuit&) : Supplier*
+    - findArticle(const std::string&) : Article*
+    - findOrder(OrderNumber) : PurchaseOrder*
+    - parseAmount(const std::string&) : std::int64_t
+    - formatAmount(std::int64_t) : std::string
+    - validateCuit(const std::string&) : void
+  }
+}
+
+class main
+
+main ..> App : crea
+App o-- "*" Supplier : new / delete manual
+App o-- "*" Article
+App o-- "*" PurchaseOrder
+PurchaseOrder --> Supplier : un único proveedor
+PurchaseOrder --> Article : ítems en orden de carga
+PurchaseOrder *-- Quantity
+Article *-- Money
+Supplier *-- Cuit
+
+note right of App #FFF2CC
+  **Defecto 1 — RAII**
+  Vectores de punteros crudos con
+  `new` y `delete` manuales.
+  ..
+  **Defecto 2 — SRP**
+  Una sola clase hace menú, almacenamiento,
+  validación y formateo.
+  ..
+  **Defecto 3 — DIP/IoC (embrionario)**
+  El almacenamiento se construye en el mismo
+  lugar que lo usa: no hay puerto que inyectar.
+  ..
+  **Defecto 4 — OCP (embrionario)**
+  Tres bloques de almacenamiento y búsqueda por
+  clave copiados a mano, uno por entidad.
+  ..
+  **Defecto 5 — Information Expert**
+  El formateo de pedidos vive en `showOrders()`,
+  no en `PurchaseOrder`.
+end note
+
+note bottom of PurchaseOrder #E8F4EA
+  El par `article–quantity` y el puntero no propietario
+  **no** son un defecto: son la decisión de ADR-0002.
+  RAII se aplica al catálogo, no a estas referencias.
+end note
+
+note bottom of main #E8F0FE
+  `App(istream&, ostream&)` es el **borde de comportamiento
+  estable**: la suite de pruebas lo usa desde el primer commit
+  y sobrevive a los cinco refactorings sin cambiar expectativas.
+end note
+
+@enduml
