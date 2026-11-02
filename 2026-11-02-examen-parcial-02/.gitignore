@@ -1,0 +1,36 @@
+# Artefactos de compilación
+obj/
+*.o
+*.obj
+*.a
+*.so
+*.exe
+*.out
+
+# Binario del proyecto (Makefile target `all`)
+# TODO: agregar aquí el nombre del ejecutable cuando exista el Makefile.
+parcial02
+
+# Python (solo si la consigna lo requiere)
+__pycache__/
+*.py[cod]
+.venv/
+
+# Bases de datos locales
+*.db
+*.sqlite
+*.sqlite3
+
+# Estado generado por el workflow de tareas del curso
+.task-state.json
+
+# Entornos y editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
