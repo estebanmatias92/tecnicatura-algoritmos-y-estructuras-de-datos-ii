@@ -8,6 +8,7 @@
 #include "quantity.hpp"
 #include "supplier.hpp"
 
+#include <ostream>
 #include <utility>
 #include <vector>
 
@@ -34,6 +35,8 @@ public:
     bool operator==(const PurchaseOrder& other) const noexcept { return number_ == other.number_; }
     bool operator!=(const PurchaseOrder& other) const noexcept { return !(*this == other); }
     bool operator<(const PurchaseOrder& other) const noexcept { return number_ < other.number_; }
+
+    friend std::ostream& operator<<(std::ostream& os, const PurchaseOrder& po);
 
 private:
     OrderNumber number_;

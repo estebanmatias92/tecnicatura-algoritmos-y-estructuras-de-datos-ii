@@ -1,5 +1,7 @@
 #include "purchaseorder.hpp"
 
+#include "format.hpp"
+
 #include <stdexcept>
 
 namespace partial02 {
@@ -29,6 +31,22 @@ Money PurchaseOrder::total() const {
         sum += item.first->unitPrice().cents() * static_cast<std::int64_t>(item.second.value());
     }
     return Money(sum);
+}
+
+std::ostream& operator<<(std::ostream& os, const PurchaseOrder& po) {
+    os << "Pedido " << po.number().value() << " - creado " << po.createdAt().to_string()
+       << " - entrega " << po.expectedDelivery().to_string() << "\n";
+    for (const auto& item : po.items()) {
+        std::int64_t subtotalCents =
+            item.first->unitPrice().cents() *
+            static_cast<std::int64_t>(item.second.value());
+        os << "    " << item.first->code() << " " << item.first->description() << ": "
+           << item.second.value() << " x "
+           << formatMoney(item.first->unitPrice().cents()) << " = "
+           << formatMoney(subtotalCents) << "\n";
+    }
+    os << "  Total del pedido: " << formatMoney(po.total().cents()) << "\n";
+    return os;
 }
 
 }  // namespace partial02

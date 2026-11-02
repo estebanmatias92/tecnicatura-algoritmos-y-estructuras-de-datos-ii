@@ -68,9 +68,9 @@ note bottom of items #E8F4EA
 end note
 
 note top of orders #FFF2CC
-  Solo `suppliers` se modifica y se elimina desde la aplicación.
-  `purchase_orders` es *append-only* y `articles` es de solo lectura:
-  el seed es su única fuente (RN-011, RN-018).
+  `suppliers` se modifica y se elimina desde la aplicación (CRUD completo).
+  `purchase_orders` es *append-only* y `articles` se dan de alta en runtime
+  (RN-001, OP-01); el seed es fuente inicial, no única (RN-018).
 end note
 
 @enduml

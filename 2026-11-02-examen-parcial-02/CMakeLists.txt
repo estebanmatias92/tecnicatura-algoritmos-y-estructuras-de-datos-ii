@@ -20,9 +20,8 @@ find_package(GTest REQUIRED)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(MARIADB REQUIRED libmariadb)
 
-# Biblioteca core: dominio, servicios y repositorios en memoria
+# Biblioteca core: dominio, servicios, repositorios en memoria
 add_library(parcial02_core STATIC
-    src/app.cpp
     src/domain_error.cpp
     src/quantity.cpp
     src/money.cpp
@@ -32,6 +31,12 @@ add_library(parcial02_core STATIC
     src/article.cpp
     src/supplier.cpp
     src/purchaseorder.cpp
+    src/article_catalog.cpp
+    src/message_catalog.cpp
+    src/supplier_service.cpp
+    src/purchase_order_service.cpp
+    src/console.cpp
+    src/format.cpp
 )
 
 target_include_directories(parcial02_core PUBLIC include)
@@ -39,7 +44,6 @@ target_include_directories(parcial02_core PUBLIC include)
 # Ejecutable principal (CLI de menú)
 add_executable(parcial02
     src/main.cpp
-    src/console.cpp
 )
 
 target_link_libraries(parcial02 PRIVATE parcial02_core ${MARIADB_LIBRARIES})
@@ -47,7 +51,7 @@ target_include_directories(parcial02 PRIVATE ${MARIADB_INCLUDE_DIRS})
 
 # Pruebas unitarias (GoogleTest, ejecutadas con CTest)
 add_executable(parcial02_tests
-    tests/test_app.cpp
+    tests/test_console.cpp
     tests/test_domain_error.cpp
     tests/test_quantity.cpp
     tests/test_money.cpp

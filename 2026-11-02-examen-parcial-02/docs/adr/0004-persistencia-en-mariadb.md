@@ -98,9 +98,9 @@ AC-003, AC-004 y AC-012 exigen crear pedidos en runtime. El alcance real es:
 
 | Entidad | Operaciones desde la aplicación | Implementación MariaDB |
 |---------|--------------------------------|------------------------|
-| `Supplier` | alta, baja, modificación, lectura | `MariaDbSupplierRepository` (`MutableRepository`) |
-| `Article` | solo lectura | `MariaDbArticleRepository` (`Repository`) |
-| `PurchaseOrder` | alta y lectura (append-only) | `MariaDbPurchaseOrderRepository` (`Repository` + `OrderNumberSequence`) |
+| `Supplier` | alta, baja, modificación, lectura | `MutableRepository<Supplier, Cuit>` |
+| `Article` | **alta y lectura** (RN-001, OP-01) | `Repository<Article, std::string>` |
+| `PurchaseOrder` | alta y lectura (append-only) | `Repository<PurchaseOrder, OrderNumber>` + `OrderNumberSequence` |
 
 Si los pedidos no se persistieran, BR-010 ("nunca se reutiliza") se rompería en cada
 reinicio: el contador arrancaría de nuevo desde el máximo del seed.
