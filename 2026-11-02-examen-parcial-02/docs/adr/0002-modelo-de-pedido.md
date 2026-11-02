@@ -7,7 +7,7 @@
 ## Contexto
 
 La consigna pide cargar "Pedidos de Artículos Asignados a los Proveedores" y mostrar
-"los pedidos de los artículos". **No menciona cantidades**, y el PDF original cierra
+"los pedidos de los artículos". **No menciona cantidades**, y el enunciado original cierra
 con una nota explícita: *"No 'haga' de más, tampoco de 'Menos'"*.
 
 Al mismo tiempo, un pedido de compra sin cantidades no representa el caso real: no
@@ -45,7 +45,7 @@ public:
 ## Alternativas descartadas
 
 **A. Sin cantidades** — `std::vector<const Article*>`. Es la lectura más literal del
-enunciado y la más segura frente a la nota del PDF. Descartada porque pierde el caso
+enunciado y la más segura frente a la nota del enunciado. Descartada porque pierde el caso
 real: un pedido de compra sin magnitud no es un pedido de compra.
 
 **B. Cantidad como `unsigned` suelto** en el par. Descartada por dos motivos: permite
@@ -54,7 +54,7 @@ sola vez y hace imposible el estado inválido, que es precisamente lo que el tra
 quiere demostrar con RAII.
 
 **C. Entidad de línea (`OrderLine`) con `article` y `quantity`.** Descartada: la
-consigna no la nombra, y con dos campos no se justifica una clase. La nota del PDF
+consigna no la nombra, y con dos campos no se justifica una clase. La nota del enunciado
 apunta directo a no agregarla. Si en el futuro una línea necesitara precio,
 descuento o número de posición, esta decisión habría que revisarla.
 
@@ -72,3 +72,25 @@ descuento o número de posición, esta decisión habría que revisarla.
 - Si se agregara un precio por artículo pedido, el par deja de alcanzar y habría que
   migrar a una estructura con nombre. Es un costo aceptado a cambio de no crear hoy
   una clase que la consigna no pide.
+
+## Enmienda 2026-11-02 — precio, fecha y número de pedido
+
+La elicitación amplió el modelo sin cambiar la decisión de fondo: **sigue sin existir
+una entidad de línea**.
+
+- `Article` incorpora `unitPrice` como `Money` (centavos, entero de 64 bits, ARS). El
+  precio vive en el catálogo y el pedido lo consulta: no se congela por pedido, así
+  que no hay histórico de precios (BR-012).
+- `PurchaseOrder` incorpora `number` (`OrderNumber`, autogenerado y único),
+  `createdAt` (`Date`, fecha del sistema al crear) y `expectedDelivery` (`Date`,
+  ingresada, nunca anterior a `createdAt`).
+- La tabla relacional `purchase_order_items` guarda el par artículo–cantidad. Es una
+  tabla de unión, **no** una entidad de dominio: el modelo de objetos no gana un
+  `OrderLine`.
+- El total del pedido se calcula (`Σ unitPrice × quantity`) y no se persiste.
+
+El disparador anotado arriba —"si una línea necesitara precio, descuento o número de
+posición"— **no se activó**: el precio pertenece al artículo, no al ítem del pedido. Si
+en el futuro se quisiera congelar el precio pactado, esta decisión habría que
+revisarla y correspondería un ADR que superseda a este.
+

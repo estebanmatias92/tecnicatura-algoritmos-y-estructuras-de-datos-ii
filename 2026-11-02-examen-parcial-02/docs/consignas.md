@@ -1,10 +1,6 @@
 # Consignas — Examen Parcial 02
 
 > Algoritmos y Estructuras de Datos II — Unidad 07. Fecha: 2026-11-02.
-> Formato de entrega: **.pdf** vía Google Classroom.
-
-- [Plataforma de entrega](https://classroom.google.com/c/NzkzODkzNjcwMTA0/a/ODgzMTk2NjY0OTAw/details)
-- [Instrucciones](https://drive.google.com/file/d/1AdM8wLg8JqPkfIMqxnpWosTHe8crF7qK/view)
 
 ## Caso de trabajo
 

@@ -7,8 +7,19 @@ obj/
 *.exe
 *.out
 
-# Binario del proyecto (Makefile target `all`)
-# TODO: agregar aquí el nombre del ejecutable cuando exista el Makefile.
+# Build con CMake (Makefile target `build`) y artefactos de pruebas
+build/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CTestTestfile.cmake
+Testing/
+coverage/
+*.gcda
+*.gcno
+*.gcov
+
+# Binario del proyecto (por si se compila fuera de `build/`)
 parcial02
 
 # Python (solo si la consigna lo requiere)

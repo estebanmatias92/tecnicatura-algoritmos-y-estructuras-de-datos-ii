@@ -4,9 +4,11 @@ How the engineering skills should consume this project's domain documentation wh
 
 ## Before exploring, read these
 
-- **`docs/glosario-de-dominio.md`**: the domain vocabulary (`Article`, `Supplier`, `PurchaseOrder`, `Quantity`) and the list of synonyms to avoid. Use these terms in issue titles, hypotheses, test names and code identifiers.
+- **`docs/glosario-de-dominio.md`**: the domain vocabulary (`Article`, `Supplier`, `PurchaseOrder`, `Quantity`, `Money`, `Date`, `Cuit`, `OrderNumber`) and the list of synonyms to avoid. Use these terms in issue titles, hypotheses, test names and code identifiers.
 - **`docs/registro-necesidades.md`**: the functional (`RN-###`) and non-functional (`RNF-###`) requirements, plus the explicit out-of-scope list. Cite a requirement ID when a change traces to one.
-- **`docs/adr/`**: read ADRs that touch the area you're about to work in. ADR-0001 covers how the before/after refactoring is demonstrated; ADR-0002 covers the purchase order model.
+- **`docs/reglas-de-negocio.md`**: the business rules (`BR-###`), each traced to its `RN-###` and to where it is enforced.
+- **`docs/criterios-de-aceptacion.md`**: the Given/When/Then acceptance criteria (`AC-###`) per requirement; this is the source the test phase hangs from.
+- **`docs/adr/`**: read ADRs that touch the area you're about to work in. ADR-0001 covers how the before/after refactoring is demonstrated; ADR-0002 covers the purchase order model; ADR-0003 the app type and stack; ADR-0004 the MariaDB persistence; ADR-0005 the test strategy.
 
 This project follows the course convention rather than the generic `GLOSSARY.md` layout: sibling practices use `docs/glosario-de-dominio.md` and `docs/registro-necesidades.md`, so new docs keep the same names and stay navigable next to them.
 
@@ -19,15 +21,24 @@ Single-context project (no `GLOSSARY-MAP.md` here, and no monorepo signals):
 ```
 2026-11-02-examen-parcial-02/
 ├── AGENTS.md
-├── docs/
-│   ├── consignas.md                 ← consigna original del parcial
-│   ├── glosario-de-dominio.md       ← vocabulario
-│   ├── registro-necesidades.md      ← RN / RNF / fuera de alcance
-│   ├── refactoring.md               ← índice de la demostración antes/después
-│   ├── adr/                         ← decisiones con alternativas descartadas
-│   └── diagrams/                    ← *.puml versionados + *.svg renderizados
+├── CMakeLists.txt
+├── Makefile                         ← task runner (DX)
+├── docker-compose.yml
+├── cmake/                           ← módulos de CMake
+├── db/init/                         ← 01-schema.sql, 02-seed.sql
 ├── include/*.hpp
-└── src/*.cpp
+├── src/*.cpp
+├── tests/*.cpp                      ← GTest + CTest
+├── build/                           ← artefactos (gitignored)
+└── docs/
+    ├── consignas.md                 ← consigna original del parcial
+    ├── glosario-de-dominio.md       ← vocabulario
+    ├── registro-necesidades.md      ← RN / RNF / fuera de alcance
+    ├── reglas-de-negocio.md         ← BR trazadas a RN
+    ├── criterios-de-aceptacion.md   ← AC en Given/When/Then por RN
+    ├── refactoring.md               ← índice de la demostración antes/después
+    ├── adr/                         ← decisiones con alternativas descartadas
+    └── diagrams/                    ← *.puml versionados + *.svg renderizados
 ```
 
 ## Use the glossary's vocabulary

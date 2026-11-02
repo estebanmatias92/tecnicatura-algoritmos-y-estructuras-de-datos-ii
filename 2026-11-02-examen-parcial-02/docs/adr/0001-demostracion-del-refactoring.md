@@ -3,8 +3,8 @@
 - **Estado:** aceptada
 - **Fecha:** 2026-11-02
 - **Contexto:** RNF-005 exige demostrar el antes y el después de aplicar RAII, IoC,
-  SOLID y GRASP. La entrega es el link de GitHub de este directorio, y el profesor
-  inspecciona el repositorio — en particular los tags.
+  SOLID y GRASP. La evidencia es el historial lineal del repositorio y, en particular,
+  sus tags.
 
 ## Decisión
 
@@ -19,8 +19,8 @@ branches paralelos:
 5. La evidencia se indexa en `docs/refactoring.md` y en dos diagramas de clases,
    `clases-antes.puml` y `clases-despues.puml`.
 
-El tag `parcial02-antes` se lee en GitHub como *"ver el código en este punto"*, y
-`compare/parcial02-antes...parcial02-final` da el diff completo sin que nadie tenga
+El tag `parcial02-antes` marca el punto exacto del código a inspeccionar, y
+`git diff parcial02-antes..parcial02-final` da el diff completo sin que nadie tenga
 que reconstruirlo.
 
 ## Defectos plantados en la versión "antes"
@@ -53,7 +53,7 @@ cientos de líneas no permite atribuir ningún cambio a ningún principio, que e
 exactamente lo que el RNF-005 pide demostrar.
 
 **Solo diagramas, sin historia en git.** Descartada como estrategia principal, pero
-se conserva como complemento: los dos `.puml` son parte de la entrega porque el
+se conserva como complemento: los dos `.puml` son parte de la demostración porque el
 enunciado dice "en diagrama **o** código", y tener ambos es más fuerte que uno.
 
 ## Consecuencias
@@ -63,4 +63,5 @@ enunciado dice "en diagrama **o** código", y tener ambos es más fuerte que uno
   obliga a un orden de trabajo disciplinado y a no mezclar mejoras.
 - El lector necesita un punto de entrada; sin `docs/refactoring.md` los tags son
   arqueología. Ese archivo es parte de la decisión, no un extra.
-- Los diagramas `.svg` se commitean renderizados para que se vean en GitHub.
+- Los diagramas `.svg` se commitean renderizados para que se vean al navegar el
+  repositorio.
