@@ -94,7 +94,7 @@ void MariaDbArticleRepository::add(const Article& entity) {
     bind[1].buffer_type = MYSQL_TYPE_STRING;
     bind[1].buffer = const_cast<char*>(descStr);
     bind[1].length = &descLen;
-    bind[2].buffer_type = MYSQL_TYPE_INT64;
+    bind[2].buffer_type = MYSQL_TYPE_LONGLONG;
     bind[2].buffer = &cents;
 
     mysql_stmt_bind_param(stmt, bind);

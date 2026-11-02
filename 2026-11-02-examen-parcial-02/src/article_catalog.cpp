@@ -11,6 +11,13 @@ void ArticleCatalog::add(std::unique_ptr<Article> article) {
     items_.push_back(std::move(article));
 }
 
+void ArticleCatalog::add(const Article& article) {
+    if (find(article.code()) != nullptr) {
+        throw std::runtime_error("duplicate article code");
+    }
+    items_.push_back(std::make_unique<Article>(article));
+}
+
 const Article* ArticleCatalog::find(const std::string& code) const {
     for (const auto& item : items_) {
         if (item->code() == code) {

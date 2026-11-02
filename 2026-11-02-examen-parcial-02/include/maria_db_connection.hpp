@@ -1,11 +1,10 @@
 #ifndef PARTIAL02_MARIA_DB_CONNECTION_HPP
 #define PARTIAL02_MARIA_DB_CONNECTION_HPP
 
+#include <mysql.h>
+
 #include <cstdint>
 #include <string>
-
-struct MYSQL;
-struct MYSQL_RES;
 
 namespace partial02 {
 

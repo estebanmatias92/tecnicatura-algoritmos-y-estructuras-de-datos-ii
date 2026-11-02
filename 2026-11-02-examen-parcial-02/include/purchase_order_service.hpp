@@ -1,7 +1,6 @@
 #ifndef PARTIAL02_PURCHASE_ORDER_SERVICE_HPP
 #define PARTIAL02_PURCHASE_ORDER_SERVICE_HPP
 
-#include "article_catalog.hpp"
 #include "clock.hpp"
 #include "order_number_sequence.hpp"
 #include "purchaseorder.hpp"
@@ -26,7 +25,7 @@ class PurchaseOrderService {
 public:
     PurchaseOrderService(
         MutableRepository<Supplier, Cuit>& supplierRepo,
-        ArticleCatalog& catalog,
+        Repository<Article, std::string>& catalog,
         Repository<PurchaseOrder, OrderNumber>& orderRepo,
         OrderNumberSequence& sequence,
         Clock& clock);
@@ -45,7 +44,7 @@ public:
 
 private:
     MutableRepository<Supplier, Cuit>& supplierRepo_;
-    ArticleCatalog& catalog_;
+    Repository<Article, std::string>& catalog_;
     Repository<PurchaseOrder, OrderNumber>& orderRepo_;
     OrderNumberSequence& sequence_;
     Clock& clock_;

@@ -1,6 +1,7 @@
 #include "purchase_order_service.hpp"
 
 #include "domain_error.hpp"
+#include "repository.hpp"
 
 #include <algorithm>
 
@@ -8,7 +9,7 @@ namespace partial02 {
 
 PurchaseOrderService::PurchaseOrderService(
     MutableRepository<Supplier, Cuit>& supplierRepo,
-    ArticleCatalog& catalog,
+    Repository<Article, std::string>& catalog,
     Repository<PurchaseOrder, OrderNumber>& orderRepo,
     OrderNumberSequence& sequence,
     Clock& clock)

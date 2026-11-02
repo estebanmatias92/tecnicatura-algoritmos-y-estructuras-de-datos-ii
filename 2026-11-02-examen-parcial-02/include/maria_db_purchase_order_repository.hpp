@@ -5,6 +5,7 @@
 
 #include "maria_db_connection.hpp"
 #include "ordernumber.hpp"
+#include "order_number_sequence.hpp"
 #include "purchaseorder.hpp"
 #include "repository.hpp"
 
@@ -18,7 +19,7 @@ class MariaDbSupplierRepository;
 
 /// Adaptador MariaDB para PurchaseOrder. Implementa Repository<PurchaseOrder,
 /// OrderNumber> (alta y lectura, append-only) y OrderNumberSequence
-/// (número = MAX(number)+1 dentro de la transacción).
+/// (número = MAX(number)+1 antes del insert).
 class MariaDbPurchaseOrderRepository : public Repository<PurchaseOrder, OrderNumber>,
                                        public OrderNumberSequence {
 public:
@@ -38,6 +39,7 @@ private:
     MariaDbSupplierRepository& supplierRepo_;
     mutable std::vector<std::unique_ptr<PurchaseOrder>> cache_;
 
+    std::vector<PurchaseOrder::Item> loadItems(const OrderNumber& number) const;
     void loadAll() const;
 };
 

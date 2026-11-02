@@ -1,5 +1,6 @@
 #include "maria_db_supplier_repository.hpp"
 
+#include <algorithm>
 #include <mysql.h>
 #include <stdexcept>
 #include <string>

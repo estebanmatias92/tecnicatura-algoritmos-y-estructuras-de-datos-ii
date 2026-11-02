@@ -9,7 +9,8 @@
 namespace partial02 {
 
 Console::Console(std::istream& in, std::ostream& out,
-                 ArticleCatalog& catalog, SupplierService& suppliers,
+                 Repository<Article, std::string>& catalog,
+                 SupplierService& suppliers,
                  PurchaseOrderService& orders, MessageCatalog& messages)
     : in_(in), out_(out), catalog_(catalog), suppliers_(suppliers),
       orders_(orders), messages_(messages) {}
@@ -203,7 +204,7 @@ void Console::createArticle() {
             throw ValidationError(ErrorCode::NonPositiveUnitPrice);
         }
 
-        catalog_.add(std::make_unique<Article>(code, description, Money(cents)));
+        catalog_.add(Article(code, description, Money(cents)));
         out_ << "Artículo " << code << " cargado.\n";
     });
 }

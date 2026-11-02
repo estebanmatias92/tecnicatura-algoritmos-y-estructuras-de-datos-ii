@@ -1,9 +1,10 @@
 #ifndef PARTIAL02_CONSOLE_HPP
 #define PARTIAL02_CONSOLE_HPP
 
-#include "article_catalog.hpp"
+#include "article.hpp"
 #include "message_catalog.hpp"
 #include "purchase_order_service.hpp"
+#include "repository.hpp"
 #include "supplier_service.hpp"
 
 #include <istream>
@@ -13,11 +14,13 @@ namespace partial02 {
 
 /// Adaptador de consola: lee opciones y escribe resultados. No conoce reglas
 /// de negocio ni almacenamiento. Recibe todas sus dependencias por
-/// constructor (DIP/IoC).
+/// constructor (DIP/IoC). Del catálogo de artículos usa el puerto de lectura
+/// y escritura Repository<Article, std::string>, así da igual que detrás haya
+/// un catálogo en memoria (pruebas) o el adaptador MariaDB (ejecución real).
 class Console {
 public:
     Console(std::istream& in, std::ostream& out,
-            ArticleCatalog& catalog,
+            Repository<Article, std::string>& catalog,
             SupplierService& suppliers,
             PurchaseOrderService& orders,
             MessageCatalog& messages);
@@ -37,7 +40,7 @@ public:
 private:
     std::istream& in_;
     std::ostream& out_;
-    ArticleCatalog& catalog_;
+    Repository<Article, std::string>& catalog_;
     SupplierService& suppliers_;
     PurchaseOrderService& orders_;
     MessageCatalog& messages_;
