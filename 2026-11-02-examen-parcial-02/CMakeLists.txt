@@ -22,6 +22,7 @@ pkg_check_modules(MARIADB REQUIRED libmariadb)
 
 # Biblioteca core: dominio, servicios y repositorios en memoria
 add_library(parcial02_core STATIC
+    src/app.cpp
     src/domain_error.cpp
     src/quantity.cpp
     src/money.cpp
@@ -46,6 +47,7 @@ target_include_directories(parcial02 PRIVATE ${MARIADB_INCLUDE_DIRS})
 
 # Pruebas unitarias (GoogleTest, ejecutadas con CTest)
 add_executable(parcial02_tests
+    tests/test_app.cpp
     tests/test_domain_error.cpp
     tests/test_quantity.cpp
     tests/test_money.cpp

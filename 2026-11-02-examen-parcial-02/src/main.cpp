@@ -1,5 +1,8 @@
-#include <cstdlib>
+#include "app.hpp"
+
+#include <iostream>
 
 int main() {
-    return 0;
+    partial02::App app(std::cin, std::cout);
+    return app.run();
 }
