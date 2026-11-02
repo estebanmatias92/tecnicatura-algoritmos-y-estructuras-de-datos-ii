@@ -25,6 +25,11 @@ La versión "antes" es la clase `App` (`include/app.hpp`, `src/app.cpp`), probad
 borde de comportamiento estable es lo que permite escribir la suite sin tocar el
 teclado. Dentro de `App` conviven los defectos plantados a propósito:
 
+> Nota: `include/app.hpp`, `src/app.cpp` y `tests/test_app.cpp` pertenecen a la versión
+> "antes" (tag `parcial02-antes`) y ya no forman parte de HEAD (`parcial02-final`).
+> Se conservan aquí porque documentan el punto de partida de la demostración del
+> refactoring; no se buscan en el árbol actual.
+
 | # | Defecto (en "antes") | Corrección (en "después") | Principio |
 |---|----------------------|---------------------------|-----------|
 | 1 | `new Supplier*` / `delete` manual, riesgo de fugas | `std::vector<std::unique_ptr<...>>`, cierre automático | RAII |

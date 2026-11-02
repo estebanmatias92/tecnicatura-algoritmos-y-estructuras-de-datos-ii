@@ -3,7 +3,7 @@
 > Algoritmos y Estructuras de Datos II — Unidad 07. Fecha: 2026-11-02.
 
 Aplicación de consola (CLI de menú interactivo) que permite gestionar la compra de
-materia prima ("Productos de Goma"): cargar artículos, cargar/proveedores y pedidos,
+materia prima ("Productos de Goma"): cargar artículos, cargar proveedores y cargar pedidos,
 y mostrar los pedidos agrupados por proveedor. Persistencia de proveedores en MariaDB
 con catálogo de artículos y pedidos de demostración sembrados desde SQL.
 
@@ -19,19 +19,19 @@ con catálogo de artículos y pedidos de demostración sembrados desde SQL.
 
 ## Requisitos previos
 
-```
+```bash
 g++ cmake make pkg-config libmariadb-dev docker docker-compose
 ```
 
 Para cobertura:
 
-```
+```bash
 nix-shell -p gcovr
 ```
 
 ## Estructura del proyecto
 
-```
+```text
 CMakeLists.txt            # configuración del build (CMake)
 Makefile                  # task runner (targets abajo)
 include/*.hpp             # cabeceras del dominio, servicios, repositorios y consola
@@ -47,7 +47,7 @@ docs/                     # especificaciones, ADR, diagramas
 ## Targets de `make`
 
 | Target | Descripción |
-|--------|-------------|
+| -------- | ------------- |
 | `all` / `build` | Configura con CMake y compila (`Debug`, `-Wall -Wextra`, cero advertencias). |
 | `run` | Ejecuta la app (`build/parcial02`). Requiere MariaDB arriba (`docker compose up -d`). |
 | `test` | Pruebas unitarias con CTest. **No necesita Docker**. |
@@ -70,7 +70,7 @@ Las credenciales se toman de variables de entorno con valores por defecto solo p
 desarrollo (ninguna credencial real se versiona):
 
 | Variable | Default |
-|----------|---------|
+| ---------- | --------- |
 | `MARIADB_HOST` | `127.0.0.1` |
 | `MARIADB_PORT` | `3306` |
 | `MARIADB_DATABASE` | `parcial02` |
@@ -108,8 +108,8 @@ make coverage
 ```
 
 Genera el build con instrumentación `gcov`, ejecuta las pruebas unitarias e imprime
-el reporte de `gcovr` sobre `src/`. Resultado verificado: **86.5 % de líneas**,
-por encima del umbral del 80 % exigido (RNF-011).
+el reporte de `gcovr` sobre `src/`. Umbral exigido por RNF-011: ≥ 80 % de líneas
+sobre `src/` (excluyendo `main.cpp`, los adaptadores MariaDB y el bucle del menú).
 
 ## Antes y después (refactoring)
 

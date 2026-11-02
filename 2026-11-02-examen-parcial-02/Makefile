@@ -8,7 +8,7 @@
 #   test-integration  -> pruebas de integración (requiere MariaDB arriba)
 #   clean             -> borra el directorio build/
 #
-# DX: make orquesta, CMapake genera, GTest verifica.
+# DX: make orquesta, CMake genera, GTest verifica.
 
 .PHONY: all build run test test-integration coverage clean
 
