@@ -31,11 +31,11 @@ permitir que artículos y pedidos estén hardcodeados.
 
 | # | Defecto en "antes" | Refactoring en "después" | Principio |
 |---|--------------------|--------------------------|-----------|
-| 1 | `new Proveedor*` con `delete` manual y riesgo de fuga | `std::vector<std::unique_ptr<Proveedor>>` | RAII |
-| 2 | Una clase que hace entrada/salida, almacenamiento y validación a la vez | División en `Consola`, `Repositorio` y `Servicio` | SRP / GRASP Controller |
-| 3 | El servicio instancia `new ProveedorRepositorioMemoria()` adentro | Inyección por constructor | DIP / IoC |
-| 4 | CRUD duplicado por entidad, con artículos y pedidos hardcodeados | Abstracción común de repositorio; las tres entidades la reutilizan | OCP |
-| 5 | `cout` de pedidos disperso en `main` | `Pedido::mostrar()` / `operator<<` | GRASP Information Expert |
+| 1 | `new Supplier*` con `delete` manual y riesgo de fuga | `std::vector<std::unique_ptr<Supplier>>` | RAII |
+| 2 | Una clase que hace entrada/salida, almacenamiento y validación a la vez | División en `Console`, `Repository` y `Service` | SRP / GRASP Controller |
+| 3 | El `Service` instancia `new InMemorySupplierRepository()` adentro | Inyección por constructor | DIP / IoC |
+| 4 | Almacenamiento y búsqueda por código reescritos a mano en cada entidad | `Repository<T>` reutilizable; las tres entidades la usan sin modificarse | OCP |
+| 5 | `cout` de pedidos disperso en `main` | `PurchaseOrder::show()` / `operator<<` | GRASP Information Expert |
 
 ## Alternativas descartadas
 

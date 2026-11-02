@@ -4,9 +4,9 @@ How the engineering skills should consume this project's domain documentation wh
 
 ## Before exploring, read these
 
-- **`docs/glosario-de-dominio.md`**: the domain vocabulary (Artículo, Proveedor, Pedido, Renglón de Pedido) and the list of synonyms to avoid. Use these terms in issue titles, hypotheses, test names and code identifiers.
+- **`docs/glosario-de-dominio.md`**: the domain vocabulary (`Article`, `Supplier`, `PurchaseOrder`, `Quantity`) and the list of synonyms to avoid. Use these terms in issue titles, hypotheses, test names and code identifiers.
 - **`docs/registro-necesidades.md`**: the functional (`RN-###`) and non-functional (`RNF-###`) requirements, plus the explicit out-of-scope list. Cite a requirement ID when a change traces to one.
-- **`docs/adr/`**: read ADRs that touch the area you're about to work in. ADR-0001 covers how the before/after refactoring is demonstrated.
+- **`docs/adr/`**: read ADRs that touch the area you're about to work in. ADR-0001 covers how the before/after refactoring is demonstrated; ADR-0002 covers the purchase order model.
 
 This project follows the course convention rather than the generic `GLOSSARY.md` layout: sibling practices use `docs/glosario-de-dominio.md` and `docs/registro-necesidades.md`, so new docs keep the same names and stay navigable next to them.
 
@@ -33,6 +33,8 @@ Single-context project (no `GLOSSARY-MAP.md` here, and no monorepo signals):
 ## Use the glossary's vocabulary
 
 When your output names a domain concept (in an issue title, a refactor proposal, a hypothesis, a test name), use the term as defined in `docs/glosario-de-dominio.md`. Don't drift to synonyms the glossary explicitly avoids.
+
+Code identifiers are in English; user-facing UI strings and documentation stay in Spanish (RNF-007). Don't rename a term to Spanish in code, and don't translate UI copy to English.
 
 If the concept you need isn't in the glossary yet, that's a signal: either you're inventing language the project doesn't use (reconsider) or there's a real gap (note it for `/domain-modeling`).
 
