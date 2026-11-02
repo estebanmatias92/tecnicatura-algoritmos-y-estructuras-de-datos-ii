@@ -1,0 +1,2 @@
+/usr/bin/ar qc liblibfoobar.a CMakeFiles/libfoobar.dir/example.cpp.o
+/usr/bin/ranlib liblibfoobar.a

@@ -1,0 +1,36 @@
+Start testing: Oct 21 21:09 -03
+----------------------------------------------------------
+1/1 Testing: UnitTests
+1/1 Test: UnitTests
+Command: "/Users/jloemig/CMake/six/build/runUnitTests"
+Directory: /Users/jloemig/CMake/six/build
+"UnitTests" start time: Oct 21 21:09 -03
+Output:
+----------------------------------------------------------
+Running main() from /Users/jloemig/CMake/six/ext/googletest/googletest/src/gtest_main.cc
+[==========] Running 3 tests from 2 test suites.
+[----------] Global test environment set-up.
+[----------] 2 tests from Suma
+[ RUN      ] Suma.Prueba
+[       OK ] Suma.Prueba (0 ms)
+[ RUN      ] Suma.PruebaCero
+[       OK ] Suma.PruebaCero (0 ms)
+[----------] 2 tests from Suma (0 ms total)
+
+[----------] 1 test from Resta
+[ RUN      ] Resta.Prueba
+[       OK ] Resta.Prueba (0 ms)
+[----------] 1 test from Resta (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 3 tests from 2 test suites ran. (0 ms total)
+[  PASSED  ] 3 tests.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"UnitTests" end time: Oct 21 21:09 -03
+"UnitTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 21 21:09 -03

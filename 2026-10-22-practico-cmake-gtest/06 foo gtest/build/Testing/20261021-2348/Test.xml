@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="(empty)"
+	BuildStamp="20261021-2348-Experimental"
+	Name="(empty)"
+	Generator="ctest-4.3.0"
+	CompilerName=""
+	CompilerVersion=""
+	OSName="macOS"
+	Hostname="MacMini-Jose"
+	OSRelease="27.2"
+	OSVersion="26B118"
+	OSPlatform="arm64"
+	Is64Bits="1"
+	VendorString="Apple"
+	VendorID="Apple"
+	FamilyID="0"
+	ModelID="0"
+	ModelName="Apple M4 Pro"
+	ProcessorCacheSize="131072"
+	NumberOfLogicalCPU="12"
+	NumberOfPhysicalCPU="12"
+	TotalVirtualMemory="9216"
+	TotalPhysicalMemory="24576"
+	LogicalProcessorsPerPhysical="12"
+	ProcessorClockFrequency="0.000000"
+	>
+	<Testing>
+		<StartDateTime>Oct 21 20:48 -03</StartDateTime>
+		<StartTestTime>1792626513</StartTestTime>
+		<TestList>
+			<Test>./UnitTests</Test>
+		</TestList>
+		<Test Status="passed">
+			<Name>UnitTests</Name>
+			<Path>.</Path>
+			<FullName>./UnitTests</FullName>
+			<FullCommandLine>/Users/jloemig/CMake/06\ foo\ gtest/build/runUnitTests</FullCommandLine>
+			<StartTestTime>1792626513.027838</StartTestTime>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.003445</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/Users/jloemig/CMake/06\ foo\ gtest/build/runUnitTests</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Environment">
+					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJyNkD9PwzAQxXd/ihubIXZZ2BgQVAyogFI6RREy4WqZ2neV7UA/PkkcVQ1Spb7p/vx0T++qjsiSAa8tLQrYBfagthFDVN+O0VujHtZ6j2p5CztmMAljUnhMyjAbh2N7VsbQqpH5GC7KthX13UkNVJPdDQxMtpvq2NmEUtTlSQ08Of7ULu+Rfmxg8kg9i6nsDv/g85uro/YHh+/9IIoaqu0LjGpmGzk1PZH1+nyBgMUSfCyuM8wwJE7aFeK6RAl1KL/4l+b/uvQnCJrk3KfP8Ha/2aweh5SZleIPFDOYHA==</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<EndDateTime>Oct 21 20:48 -03</EndDateTime>
+		<EndTestTime>1792626513</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

@@ -1,0 +1,1 @@
+/usr/bin/c++  -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/runUnitTests.dir/library/Car.cpp.o CMakeFiles/runUnitTests.dir/library/Myfunctions.cpp.o CMakeFiles/runUnitTests.dir/testUnit/Test.cpp.o -o runUnitTests  lib/libgtest.a lib/libgtest_main.a lib/libgtest.a

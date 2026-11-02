@@ -1,0 +1,38 @@
+1. Install Exe´s
+    Install VS Code
+    mingw64
+    make
+    cmake
+    Python
+Extension:
+    c++ 
+    c++ intellisense
+    cmake tools
+    c++ Run
+    test explorer
+
+2. Create u open folder
+
+3. Clone Google Test Framework
+Run in Terminal:
+git clone https://github.com/google/googletext.git
+
+4. Crear CMakeLists.txt (in root folder)
+
+
+5. Compilar
+
+Mkdir build
+Cd build
+cmake -G "MinGW Makefiles" .. 
+make -j8
+
+
+E:\code\cmake\bin\cmake.EXE --build e:/testing/six/build --config Debug --target all -j 6 --
+cmake -G "MinGW Makefiles" .. --target all -j 6
+make -j8
+make test
+ctest --verbose
+
+
+

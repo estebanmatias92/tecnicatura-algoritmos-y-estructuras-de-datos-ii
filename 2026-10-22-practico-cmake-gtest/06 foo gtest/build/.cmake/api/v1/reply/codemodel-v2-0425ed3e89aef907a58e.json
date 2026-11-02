@@ -1,0 +1,294 @@
+{
+	"configurations" : 
+	[
+		{
+			"abstractTargets" : 
+			[
+				{
+					"directoryIndex" : 5,
+					"id" : "Python::Interpreter::@cc7e98afc01d7463c803",
+					"jsonFile" : "target-Python__Interpreter-b62a00a7154df3037ed9.json",
+					"name" : "Python::Interpreter",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "Python::InterpreterMultiConfig::@cc7e98afc01d7463c803",
+					"jsonFile" : "target-Python__InterpreterMultiConfig-31c52c8ef4ef406ecdc4.json",
+					"name" : "Python::InterpreterMultiConfig",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "Threads::Threads::@3c294049e13452434952",
+					"jsonFile" : "target-Threads__Threads-9e7403613e0356ffd795.json",
+					"name" : "Threads::Threads",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "Threads::Threads::@cc7e98afc01d7463c803",
+					"jsonFile" : "target-Threads__Threads-878c913969579bf171f2.json",
+					"name" : "Threads::Threads",
+					"projectIndex" : 3
+				}
+			],
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-fd6451d79dc282e2f566.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						6
+					]
+				},
+				{
+					"build" : "libfoobar",
+					"jsonFile" : "directory-libfoobar-478d98f3c42bc3e8fa63.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "libfoobar",
+					"targetIndexes" : 
+					[
+						5
+					]
+				},
+				{
+					"build" : "foobar",
+					"jsonFile" : "directory-foobar-edb29e36869a1a424c90.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "foobar",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "ext/googletest",
+					"childIndexes" : 
+					[
+						4
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-ext.googletest-57067c96d514d4a9da64.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "ext/googletest"
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						2
+					],
+					"build" : "ext/googletest/googlemock",
+					"childIndexes" : 
+					[
+						5
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-ext.googletest.googlemock-ab421ecada31766ad486.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 3,
+					"projectIndex" : 2,
+					"source" : "ext/googletest/googlemock",
+					"targetIndexes" : 
+					[
+						1,
+						2
+					]
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						0,
+						1,
+						3
+					],
+					"build" : "ext/googletest/googletest",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-ext.googletest.googletest-759d82226b59ec388a01.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 4,
+					"projectIndex" : 3,
+					"source" : "ext/googletest/googletest",
+					"targetIndexes" : 
+					[
+						3,
+						4
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2
+					],
+					"name" : "foobar",
+					"targetIndexes" : 
+					[
+						0,
+						5,
+						6
+					]
+				},
+				{
+					"childIndexes" : 
+					[
+						2
+					],
+					"directoryIndexes" : 
+					[
+						3
+					],
+					"name" : "googletest-distribution",
+					"parentIndex" : 0
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						2
+					],
+					"childIndexes" : 
+					[
+						3
+					],
+					"directoryIndexes" : 
+					[
+						4
+					],
+					"name" : "gmock",
+					"parentIndex" : 1,
+					"targetIndexes" : 
+					[
+						1,
+						2
+					]
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						0,
+						1,
+						3
+					],
+					"directoryIndexes" : 
+					[
+						5
+					],
+					"name" : "gtest",
+					"parentIndex" : 2,
+					"targetIndexes" : 
+					[
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 2,
+					"id" : "foobar::@09234807e4af85f17c66",
+					"jsonFile" : "target-foobar-d6e92c2c35983b4d0047.json",
+					"name" : "foobar",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "gmock::@3c294049e13452434952",
+					"jsonFile" : "target-gmock-f5f43245548c97db79c3.json",
+					"name" : "gmock",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "gmock_main::@3c294049e13452434952",
+					"jsonFile" : "target-gmock_main-ad9f28ba360360743e99.json",
+					"name" : "gmock_main",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "gtest::@cc7e98afc01d7463c803",
+					"jsonFile" : "target-gtest-fe95a619560d5b9577a8.json",
+					"name" : "gtest",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "gtest_main::@cc7e98afc01d7463c803",
+					"jsonFile" : "target-gtest_main-9f7f229c724579a430c1.json",
+					"name" : "gtest_main",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "libfoobar::@2f17dc5f5fc3c8a7fb04",
+					"jsonFile" : "target-libfoobar-a31f1d19405592b32b39.json",
+					"name" : "libfoobar",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "runUnitTests::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-runUnitTests-f75ead73604d2a75cea9.json",
+					"name" : "runUnitTests",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/jloemig/CMake/06 foo gtest/build",
+		"source" : "/Users/jloemig/CMake/06 foo gtest"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 10
+	}
+}

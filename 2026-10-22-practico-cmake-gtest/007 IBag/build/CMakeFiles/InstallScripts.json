@@ -1,0 +1,10 @@
+{
+	"InstallScripts" : 
+	[
+		"/Users/jloemig/CMake/007 IBag/build/cmake_install.cmake",
+		"/Users/jloemig/CMake/007 IBag/build/ext/googletest/cmake_install.cmake",
+		"/Users/jloemig/CMake/007 IBag/build/ext/googletest/googlemock/cmake_install.cmake",
+		"/Users/jloemig/CMake/007 IBag/build/ext/googletest/googletest/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

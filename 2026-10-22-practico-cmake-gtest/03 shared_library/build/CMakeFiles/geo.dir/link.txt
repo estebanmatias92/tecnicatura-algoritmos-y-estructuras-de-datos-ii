@@ -1,0 +1,1 @@
+/usr/bin/c++  -arch arm64 -dynamiclib -Wl,-headerpad_max_install_names -o libgeo.dylib -install_name @rpath/libgeo.dylib CMakeFiles/geo.dir/shape/shape.cpp.o CMakeFiles/geo.dir/square/square.cpp.o

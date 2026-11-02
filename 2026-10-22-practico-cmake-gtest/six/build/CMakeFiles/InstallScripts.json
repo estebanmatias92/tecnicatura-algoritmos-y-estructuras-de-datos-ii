@@ -1,0 +1,10 @@
+{
+	"InstallScripts" : 
+	[
+		"/Users/jloemig/CMake/six/build/cmake_install.cmake",
+		"/Users/jloemig/CMake/six/build/ext/googletest/cmake_install.cmake",
+		"/Users/jloemig/CMake/six/build/ext/googletest/googlemock/cmake_install.cmake",
+		"/Users/jloemig/CMake/six/build/ext/googletest/googletest/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

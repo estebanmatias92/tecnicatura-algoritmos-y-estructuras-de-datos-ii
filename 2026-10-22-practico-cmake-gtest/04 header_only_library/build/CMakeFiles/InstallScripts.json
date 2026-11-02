@@ -1,0 +1,9 @@
+{
+	"InstallScripts" : 
+	[
+		"/Users/jloemig/CMake/04 header_only_library/build/cmake_install.cmake",
+		"/Users/jloemig/CMake/04 header_only_library/build/shape/cmake_install.cmake",
+		"/Users/jloemig/CMake/04 header_only_library/build/square/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

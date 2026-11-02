@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/Users/jloemig/CMake/04 header_only_library/build",
+  "command": "/usr/bin/c++  -I\"/Users/jloemig/CMake/04 header_only_library\"  -arch arm64 -o CMakeFiles/example1.dir/examples/example1.cpp.o -c \"/Users/jloemig/CMake/04 header_only_library/examples/example1.cpp\"",
+  "file": "/Users/jloemig/CMake/04 header_only_library/examples/example1.cpp",
+  "output": "CMakeFiles/example1.dir/examples/example1.cpp.o"
+}
+]

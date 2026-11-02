@@ -1,0 +1,29 @@
+Start testing: Oct 21 20:48 -03
+----------------------------------------------------------
+1/1 Testing: UnitTests
+1/1 Test: UnitTests
+Command: "/Users/jloemig/CMake/06 foo gtest/build/runUnitTests"
+Directory: /Users/jloemig/CMake/06 foo gtest/build
+"UnitTests" start time: Oct 21 20:48 -03
+Output:
+----------------------------------------------------------
+Running main() from /Users/jloemig/CMake/06 foo gtest/ext/googletest/googletest/src/gtest_main.cc
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from ExampleTests
+[ RUN      ] ExampleTests.Example
+[       OK ] ExampleTests.Example (0 ms)
+[----------] 1 test from ExampleTests (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"UnitTests" end time: Oct 21 20:48 -03
+"UnitTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 21 20:48 -03

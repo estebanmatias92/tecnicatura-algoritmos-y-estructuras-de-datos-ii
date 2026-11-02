@@ -1,0 +1,6 @@
+Division entre Source y Libs
+
+cmake -G "MinGW Makefiles" .. --target all -j 6
+make -j8
+make test
+ctest --verbose

@@ -1,0 +1,53 @@
+Start testing: Oct 21 21:02 -03
+----------------------------------------------------------
+1/1 Testing: UnitTests
+1/1 Test: UnitTests
+Command: "/Users/jloemig/CMake/007 IBag/build/runUnitTests"
+Directory: /Users/jloemig/CMake/007 IBag/build
+"UnitTests" start time: Oct 21 21:02 -03
+Output:
+----------------------------------------------------------
+Running main() from /Users/jloemig/CMake/007 IBag/ext/googletest/googletest/src/gtest_main.cc
+[==========] Running 5 tests from 3 test suites.
+[----------] Global test environment set-up.
+[----------] 2 tests from Suma
+[ RUN      ] Suma.Prueba
+[       OK ] Suma.Prueba (0 ms)
+[ RUN      ] Suma.PruebaCero
+/Users/jloemig/CMake/007 IBag/testUnit/Test.cpp:14: Failure
+Expected equality of these values:
+  14
+  sum(10,2)
+    Which is: 12
+[  FAILED  ] Suma.PruebaCero (0 ms)
+[----------] 2 tests from Suma (0 ms total)
+
+[----------] 1 test from Resta
+[ RUN      ] Resta.Prueba
+[       OK ] Resta.Prueba (0 ms)
+[----------] 1 test from Resta (0 ms total)
+
+[----------] 2 tests from Car
+[ RUN      ] Car.Acelerate
+***20***
+[       OK ] Car.Acelerate (0 ms)
+[ RUN      ] Car.Brakes
+[       OK ] Car.Brakes (0 ms)
+[----------] 2 tests from Car (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 5 tests from 3 test suites ran. (0 ms total)
+[  PASSED  ] 4 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] Suma.PruebaCero
+
+ 1 FAILED TEST
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Failed.
+"UnitTests" end time: Oct 21 21:02 -03
+"UnitTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 21 21:02 -03

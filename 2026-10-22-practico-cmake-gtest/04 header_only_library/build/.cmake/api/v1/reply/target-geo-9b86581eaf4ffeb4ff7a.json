@@ -1,0 +1,86 @@
+{
+	"abstract" : true,
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library"
+		],
+		"files" : 
+		[
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 11,
+				"parent" : 0
+			}
+		]
+	},
+	"codemodelVersion" : 
+	{
+		"major" : 2,
+		"minor" : 10
+	},
+	"fileSets" : 
+	[
+		{
+			"baseDirectories" : 
+			[
+				".",
+				".",
+				"."
+			],
+			"name" : "HEADERS",
+			"type" : "HEADERS",
+			"visibility" : "INTERFACE"
+		}
+	],
+	"id" : "geo::@6890427a1f51a3e7e1df",
+	"interfaceSources" : 
+	[
+		{
+			"fileSetIndex" : 0,
+			"path" : "geometry.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"fileSetIndex" : 0,
+			"path" : "shape/shape.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"fileSetIndex" : 0,
+			"path" : "square/square.h",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"name" : "geo",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sourceGroups" : 
+	[
+		{
+			"interfaceSourceIndexes" : 
+			[
+				0,
+				1,
+				2
+			],
+			"name" : "Header Files",
+			"sourceIndexes" : []
+		}
+	],
+	"sources" : [],
+	"type" : "INTERFACE_LIBRARY"
+}

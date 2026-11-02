@@ -1,0 +1,9 @@
+{
+	"InstallScripts" : 
+	[
+		"/Users/jloemig/CMake/02 executable_with_subdirectories/build/cmake_install.cmake",
+		"/Users/jloemig/CMake/02 executable_with_subdirectories/build/shape/cmake_install.cmake",
+		"/Users/jloemig/CMake/02 executable_with_subdirectories/build/square/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
