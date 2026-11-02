@@ -223,3 +223,32 @@ TEST(Console, ShowOrdersEmpty) {
     std::string out = opWithInput("", &Console::showOrders);
     EXPECT_TRUE(out.find("No hay pedidos registrados.") != std::string::npos);
 }
+
+// Muestra pedidos con ítems: ejercita PurchaseOrder::operator<< y formatMoney.
+TEST(Console, ShowOrdersConPedidos) {
+    std::istringstream in("CAU-001\nCaucho natural\n1500,00\n"
+                          "20123456789\nCauchos del Sur S.A.\n"
+                          "20123456789\n2026-12-01\nCAU-001\n5\n\n");
+    std::ostringstream out;
+    ArticleCatalog catalog;
+    InMemoryRepository<partial02::Supplier, Cuit> supplierRepo(
+        [](const partial02::Supplier& s) { return s.cuit(); });
+    InMemoryRepository<partial02::PurchaseOrder, partial02::OrderNumber>
+        orderRepo([](const partial02::PurchaseOrder& o) {
+            return o.number();
+        });
+    InMemoryOrderNumberSequence sequence;
+    SystemClock clock;
+    SupplierService supplierService(supplierRepo);
+    PurchaseOrderService orderService(supplierRepo, catalog, orderRepo,
+                                      sequence, clock);
+    MessageCatalog messages;
+    Console console(in, out, catalog, supplierService, orderService, messages);
+    console.createArticle();
+    console.createSupplier();
+    console.createOrder();
+    console.showOrders();
+    EXPECT_TRUE(out.str().find("Pedido 1 - creado") != std::string::npos);
+    EXPECT_TRUE(out.str().find("1500,00") != std::string::npos);
+    EXPECT_TRUE(out.str().find("7500,00") != std::string::npos);
+}

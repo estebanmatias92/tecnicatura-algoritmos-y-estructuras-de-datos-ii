@@ -63,6 +63,10 @@ add_executable(parcial02_tests
     tests/test_cuit.cpp
     tests/test_ordernumber.cpp
     tests/test_article.cpp
+    tests/test_article_catalog.cpp
+    tests/test_format.cpp
+    tests/test_message_catalog.cpp
+    tests/test_services.cpp
     tests/test_supplier.cpp
     tests/test_purchaseorder.cpp
 )

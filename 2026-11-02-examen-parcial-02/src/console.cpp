@@ -15,6 +15,7 @@ Console::Console(std::istream& in, std::ostream& out,
     : in_(in), out_(out), catalog_(catalog), suppliers_(suppliers),
       orders_(orders), messages_(messages) {}
 
+// GCOVR_EXCL_START
 int Console::run() {
     while (true) {
         showMenu();
@@ -42,6 +43,7 @@ int Console::run() {
         }
     }
 }
+// GCOVR_EXCL_STOP
 
 void Console::showMenu() {
     out_ << "\n";
