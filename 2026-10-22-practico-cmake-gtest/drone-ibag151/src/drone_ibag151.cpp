@@ -1,5 +1,7 @@
 #include "ibag151/drone_ibag151.hpp"
 
+#include <algorithm>
+
 namespace ibag151 {
 
 void DroneIbag151::takeOff() {
@@ -58,7 +60,10 @@ void DroneIbag151::accelerate(int amount) {
 }
 
 void DroneIbag151::brake(int amount) {
-    // Implementation added in the green step of the TDD cycle.
+    requireFlying("frenar");
+    requirePositive(amount, "frenar");
+
+    speed_ = std::max(0, speed_ - amount);
 }
 
 void DroneIbag151::requireFlying(const char* action) const {
