@@ -67,7 +67,10 @@ void DroneIbag151::brake(int amount) {
 }
 
 void DroneIbag151::unloadPackage() {
-    // Implementation added in the green step of the TDD cycle.
+    requireLanded("descargar el paquete");
+    requireDeliveryStage(DeliveryStage::WithPackage, "descargar el paquete");
+
+    delivery_stage_ = DeliveryStage::PackageUnloaded;
 }
 
 void DroneIbag151::requireFlying(const char* action) const {
@@ -76,9 +79,22 @@ void DroneIbag151::requireFlying(const char* action) const {
     }
 }
 
+void DroneIbag151::requireLanded(const char* action) const {
+    if (flight_state_ != FlightState::Landed) {
+        throw DroneError(std::string("el drone debe estar en tierra para ") + action);
+    }
+}
+
 void DroneIbag151::requirePositive(int amount, const char* action) const {
     if (amount <= 0) {
         throw DroneError(std::string("la cantidad debe ser mayor que cero para ") + action);
+    }
+}
+
+void DroneIbag151::requireDeliveryStage(DeliveryStage expected, const char* action) const {
+    if (delivery_stage_ != expected) {
+        throw DroneError(std::string("no se puede ") + action +
+                         " en el estado actual de la entrega");
     }
 }
 

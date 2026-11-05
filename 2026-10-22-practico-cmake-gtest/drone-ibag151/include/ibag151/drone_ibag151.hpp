@@ -33,7 +33,9 @@ public:
 
 private:
     void requireFlying(const char* action) const;
+    void requireLanded(const char* action) const;
     void requirePositive(int amount, const char* action) const;
+    void requireDeliveryStage(DeliveryStage expected, const char* action) const;
 
     FlightState flight_state_{FlightState::Landed};
     DeliveryStage delivery_stage_{DeliveryStage::WithPackage};
