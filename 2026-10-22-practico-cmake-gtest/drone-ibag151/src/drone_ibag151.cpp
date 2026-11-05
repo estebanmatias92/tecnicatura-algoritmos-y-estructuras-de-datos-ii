@@ -11,7 +11,13 @@ void DroneIbag151::takeOff() {
 }
 
 void DroneIbag151::land() {
-    // Implementation added in the green step of the TDD cycle.
+    if (flight_state_ == FlightState::Landed) {
+        throw DroneError("el drone ya esta en tierra");
+    }
+
+    flight_state_ = FlightState::Landed;
+    altitude_ = 0;
+    speed_ = 0;
 }
 
 FlightState DroneIbag151::flightState() const {
