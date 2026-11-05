@@ -15,6 +15,7 @@ public:
     DroneIbag151() = default;
 
     void takeOff() override;
+    void land() override;
 
     FlightState flightState() const override;
     DeliveryStage deliveryStage() const override;

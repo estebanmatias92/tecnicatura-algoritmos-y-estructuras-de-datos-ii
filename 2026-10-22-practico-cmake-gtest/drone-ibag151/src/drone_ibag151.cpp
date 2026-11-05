@@ -10,6 +10,10 @@ void DroneIbag151::takeOff() {
     flight_state_ = FlightState::Flying;
 }
 
+void DroneIbag151::land() {
+    // Implementation added in the green step of the TDD cycle.
+}
+
 FlightState DroneIbag151::flightState() const {
     return flight_state_;
 }

@@ -3,6 +3,7 @@ include(${PROJECT_SOURCE_DIR}/cmake/dependencies.cmake)
 add_executable(drone_tests
     test_initial_state.cpp
     test_despegar.cpp
+    test_aterrizar.cpp
 )
 
 target_link_libraries(drone_tests
