@@ -21,7 +21,22 @@ void DroneIbag151::land() {
 }
 
 void DroneIbag151::ascend(int meters) {
-    // Implementation added in the green step of the TDD cycle.
+    requireFlying("elevar");
+    requirePositive(meters, "elevar");
+
+    altitude_ += meters;
+}
+
+void DroneIbag151::requireFlying(const char* action) const {
+    if (flight_state_ != FlightState::Flying) {
+        throw DroneError(std::string("el drone debe estar en vuelo para ") + action);
+    }
+}
+
+void DroneIbag151::requirePositive(int amount, const char* action) const {
+    if (amount <= 0) {
+        throw DroneError(std::string("la cantidad debe ser mayor que cero para ") + action);
+    }
 }
 
 FlightState DroneIbag151::flightState() const {

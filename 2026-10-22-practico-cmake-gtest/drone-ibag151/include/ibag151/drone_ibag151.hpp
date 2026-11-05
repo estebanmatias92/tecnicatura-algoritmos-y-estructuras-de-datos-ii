@@ -26,6 +26,9 @@ public:
     bool hasPackage() const override;
 
 private:
+    void requireFlying(const char* action) const;
+    void requirePositive(int amount, const char* action) const;
+
     FlightState flight_state_{FlightState::Landed};
     DeliveryStage delivery_stage_{DeliveryStage::WithPackage};
     int altitude_{0};
