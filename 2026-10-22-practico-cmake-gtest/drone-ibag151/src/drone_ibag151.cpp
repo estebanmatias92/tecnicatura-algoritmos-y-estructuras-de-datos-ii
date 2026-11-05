@@ -3,7 +3,11 @@
 namespace ibag151 {
 
 void DroneIbag151::takeOff() {
-    // Implementation added in the green step of the TDD cycle.
+    if (flight_state_ == FlightState::Flying) {
+        throw DroneError("el drone ya esta en vuelo");
+    }
+
+    flight_state_ = FlightState::Flying;
 }
 
 FlightState DroneIbag151::flightState() const {
