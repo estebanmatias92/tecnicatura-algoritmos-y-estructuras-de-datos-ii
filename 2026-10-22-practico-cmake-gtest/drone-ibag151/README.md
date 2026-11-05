@@ -6,9 +6,9 @@ The assignment asks for an object-oriented drone ("IBag151") with a console
 interface, a class diagram, SOLID/GRASP design, and one incremental unit test
 per activity.
 
-> **Status:** work in progress. The build system and all eleven drone
-> activities with their unit tests are in place (S0–S11). The console
-> adapter, diagrams and design documents are added in later increments.
+> **Status:** work in progress. The build system, all eleven drone activities,
+> the console adapter and their unit tests are in place (S0–S12). Design
+> documents and UML diagrams are added in later increments.
 
 ## Layout
 
@@ -42,6 +42,29 @@ make dist       # package the sources for submission
 ```
 
 The CMake tree lives in `build/` and is not committed.
+
+## Console commands
+
+The console reads one command per line and echoes it as "sent to the drone":
+
+| Command | Effect |
+|---|---|
+| `despegar` | Take off |
+| `aterrizar` | Land (resets altitude and speed) |
+| `elevar [metros]` | Gain altitude (default 1 m) |
+| `bajar [metros]` | Lose altitude (default 1 m) |
+| `girar derecha` / `girar izquierda` | Rotate 90° |
+| `acelerar [unidades]` | Increase speed (default 1) |
+| `frenar [unidades]` | Reduce speed, clamped at 0 (default 1) |
+| `descargar paquete` | Unload the package after landing |
+| `sacar foto` | Take the reception photo |
+| `notificar entrega` | Notify the delivery |
+| `estado` | Print flight and delivery status |
+| `ayuda` | Print the command list |
+| `salir` | End the session |
+
+`make run` feeds `scripts/demo.txt`, a complete scripted delivery. Use
+`make run-interactive` to type commands yourself.
 
 ## Activities
 
