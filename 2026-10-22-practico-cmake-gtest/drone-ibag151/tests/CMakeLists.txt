@@ -12,6 +12,7 @@ add_executable(drone_tests
     test_frenar.cpp
     test_descargar_paquete.cpp
     test_sacar_foto.cpp
+    test_notificar_entrega.cpp
 )
 
 target_link_libraries(drone_tests

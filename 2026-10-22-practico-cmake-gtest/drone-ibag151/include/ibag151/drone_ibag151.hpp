@@ -24,6 +24,7 @@ public:
     void brake(int amount) override;
     void unloadPackage() override;
     void takeReceptionPhoto() override;
+    void notifyDelivery() override;
 
     FlightState flightState() const override;
     DeliveryStage deliveryStage() const override;

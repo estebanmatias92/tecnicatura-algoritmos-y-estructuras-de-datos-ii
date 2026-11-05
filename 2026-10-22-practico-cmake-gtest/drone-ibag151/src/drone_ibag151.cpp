@@ -80,6 +80,10 @@ void DroneIbag151::takeReceptionPhoto() {
     delivery_stage_ = DeliveryStage::ReceptionPhotographed;
 }
 
+void DroneIbag151::notifyDelivery() {
+    // Implementation added in the green step of the TDD cycle.
+}
+
 void DroneIbag151::requireFlying(const char* action) const {
     if (flight_state_ != FlightState::Flying) {
         throw DroneError(std::string("el drone debe estar en vuelo para ") + action);

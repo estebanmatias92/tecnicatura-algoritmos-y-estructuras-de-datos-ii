@@ -44,6 +44,9 @@ public:
     /// Takes the reception photo. Requires the package to be unloaded.
     virtual void takeReceptionPhoto() = 0;
 
+    /// Notifies the delivery. Requires the reception photo to be taken.
+    virtual void notifyDelivery() = 0;
+
     virtual FlightState flightState() const = 0;
     virtual DeliveryStage deliveryStage() const = 0;
     virtual int altitude() const = 0;
