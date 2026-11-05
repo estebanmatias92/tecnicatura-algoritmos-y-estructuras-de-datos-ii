@@ -16,6 +16,7 @@ public:
 
     void takeOff() override;
     void land() override;
+    void ascend(int meters) override;
 
     FlightState flightState() const override;
     DeliveryStage deliveryStage() const override;

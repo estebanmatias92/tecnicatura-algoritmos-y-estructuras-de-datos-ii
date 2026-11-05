@@ -20,6 +20,10 @@ void DroneIbag151::land() {
     speed_ = 0;
 }
 
+void DroneIbag151::ascend(int meters) {
+    // Implementation added in the green step of the TDD cycle.
+}
+
 FlightState DroneIbag151::flightState() const {
     return flight_state_;
 }
