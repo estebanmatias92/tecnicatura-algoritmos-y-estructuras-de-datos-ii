@@ -11,6 +11,7 @@ add_executable(drone_tests
     test_acelerar.cpp
     test_frenar.cpp
     test_descargar_paquete.cpp
+    test_sacar_foto.cpp
 )
 
 target_link_libraries(drone_tests

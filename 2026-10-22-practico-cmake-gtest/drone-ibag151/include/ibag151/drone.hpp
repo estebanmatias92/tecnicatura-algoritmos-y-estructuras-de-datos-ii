@@ -41,6 +41,9 @@ public:
     /// Unloads the package. Requires landing with the package still on board.
     virtual void unloadPackage() = 0;
 
+    /// Takes the reception photo. Requires the package to be unloaded.
+    virtual void takeReceptionPhoto() = 0;
+
     virtual FlightState flightState() const = 0;
     virtual DeliveryStage deliveryStage() const = 0;
     virtual int altitude() const = 0;

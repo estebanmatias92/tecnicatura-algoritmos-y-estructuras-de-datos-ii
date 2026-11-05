@@ -23,6 +23,7 @@ public:
     void accelerate(int amount) override;
     void brake(int amount) override;
     void unloadPackage() override;
+    void takeReceptionPhoto() override;
 
     FlightState flightState() const override;
     DeliveryStage deliveryStage() const override;
