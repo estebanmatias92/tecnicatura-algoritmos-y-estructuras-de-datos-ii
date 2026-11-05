@@ -25,6 +25,7 @@ endif()
 # Core library: domain model and adapters, independent of the console entry point.
 add_library(drone_core STATIC
     src/drone_ibag151.cpp
+    src/console_interface.cpp
 )
 
 add_library(ibag151::drone_core ALIAS drone_core)

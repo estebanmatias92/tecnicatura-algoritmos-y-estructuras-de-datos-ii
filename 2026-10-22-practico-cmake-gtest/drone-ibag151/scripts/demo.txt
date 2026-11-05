@@ -1,0 +1,14 @@
+ayuda
+despegar
+elevar 25
+girar derecha
+acelerar 10
+estado
+frenar 10
+bajar 25
+aterrizar
+descargar paquete
+sacar foto
+notificar entrega
+estado
+salir
