@@ -1,0 +1,87 @@
+@startuml drone-ibag151
+title Drone IBag151 - diagrama de clases
+
+skinparam classAttributeIconSize 0
+hide empty members
+
+package "Dominio" {
+    enum FlightState {
+        Landed
+        Flying
+    }
+
+    enum DeliveryStage {
+        WithPackage
+        PackageUnloaded
+        ReceptionPhotographed
+        DeliveryNotified
+    }
+
+    class DroneError <<exception>> {
+        +DroneError(message: string)
+    }
+
+    interface Drone <<puerto>> {
+        +takeOff() : void
+        +land() : void
+        +ascend(meters : int) : void
+        +descend(meters : int) : void
+        +turnRight() : void
+        +turnLeft() : void
+        +accelerate(amount : int) : void
+        +brake(amount : int) : void
+        +unloadPackage() : void
+        +takeReceptionPhoto() : void
+        +notifyDelivery() : void
+        +flightState() : FlightState
+        +deliveryStage() : DeliveryStage
+        +altitude() : int
+        +heading() : int
+        +speed() : int
+        +hasPackage() : bool
+    }
+
+    class DroneIbag151 {
+        -flight_state_ : FlightState
+        -delivery_stage_ : DeliveryStage
+        -altitude_ : int
+        -heading_ : int
+        -speed_ : int
+        -requireFlying(action : string) : void
+        -requireLanded(action : string) : void
+        -requirePositive(amount : int, action : string) : void
+        -requireDeliveryStage(expected : DeliveryStage, action : string) : void
+    }
+}
+
+package "Adaptador" {
+    class ConsoleInterface {
+        -in_ : istream
+        -out_ : ostream
+        -drone_ : Drone
+        +ConsoleInterface(in : istream, out : ostream, drone : Drone)
+        +run() : int
+        -execute(line : string) : bool
+        -printStatus() : void
+        -printHelp() : void
+    }
+}
+
+class main <<composition root>>
+
+class "std::runtime_error" as RuntimeError
+
+Drone <|.. DroneIbag151
+DroneError --|> RuntimeError
+DroneIbag151 --> FlightState
+DroneIbag151 --> DeliveryStage
+ConsoleInterface --> Drone : usa
+main ..> DroneIbag151 : crea
+main ..> ConsoleInterface : crea
+
+note right of ConsoleInterface
+  Recibe los streams y el puerto
+  por constructor (DIP).
+end note
+
+@enduml

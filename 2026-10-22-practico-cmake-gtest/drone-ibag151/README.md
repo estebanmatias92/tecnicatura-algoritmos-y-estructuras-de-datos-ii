@@ -6,9 +6,9 @@ The assignment asks for an object-oriented drone ("IBag151") with a console
 interface, a class diagram, SOLID/GRASP design, and one incremental unit test
 per activity.
 
-> **Status:** work in progress. The build system, all eleven drone activities,
-> the console adapter and their unit tests are in place (S0–S12). Design
-> documents and UML diagrams are added in later increments.
+> **Status:** implementation complete for the assignment scope. Build system,
+> the eleven drone activities, the console adapter, 57 unit tests, design
+> documents and UML diagrams are in place.
 
 ## Layout
 
@@ -82,11 +82,37 @@ The console reads one command per line and echoes it as "sent to the drone":
 | 10 | Sacar foto de la recepción | `Drone::takeReceptionPhoto` | `tests/test_sacar_foto.cpp` | Done |
 | 11 | Notificar la entrega | `Drone::notifyDelivery` | `tests/test_notificar_entrega.cpp` | Done |
 
+## Documentation
+
+- [Consignas del TP](docs/consignas.md)
+- [Requisitos y criterios de aceptación](docs/requisitos.md)
+- [Reglas de vuelo y de entrega](docs/reglas-de-vuelo.md)
+- [Glosario de dominio](docs/glosario-de-dominio.md)
+- [Refactoring: de `Car` a `DroneIbag151`](docs/refactoring.md)
+- ADRs: [FetchContent](docs/adr/0001-fetchcontent-gtest.md),
+  [Makefile](docs/adr/0002-makefile-task-runner.md),
+  [PlantUML](docs/adr/0003-puml-para-uml.md)
+
+## UML
+
+- [Diagrama de clases](docs/diagrams/drone-ibag151.svg)
+  ([fuente](docs/diagrams/drone-ibag151.puml))
+- [Flujo de consola](docs/diagrams/console-flow.svg)
+  ([fuente](docs/diagrams/console-flow.puml))
+- [Estados de vuelo y entrega](docs/diagrams/delivery-states.svg)
+  ([fuente](docs/diagrams/delivery-states.puml))
+
+Regenerate them with `make diagram`.
+
 ## Design notes
 
 - `Drone` is the port the rest of the program depends on; `DroneIbag151` is the
   concrete implementation. State is private and only changes through validated
   operations, raising `DroneError` when a transition is invalid.
-- The interface grows one activity at a time, driven by a failing test first.
+- `ConsoleInterface` is an adapter that receives the streams and the port by
+  constructor, so it can be tested with string streams and never touches
+  global `std::cin`/`std::cout`.
+- The interface grew one activity at a time, each one driven by a failing test
+  first.
 - GoogleTest is pinned to `v1.18.0` in `cmake/dependencies.cmake`; it is a
   development-only dependency and is not vendored in the repository.

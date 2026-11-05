@@ -1,0 +1,28 @@
+@startuml delivery-states
+title Drone IBag151 - estados de vuelo y de entrega
+
+state "Vuelo" as Flight {
+    [*] --> Landed
+    state "Landed (en tierra)" as Landed
+    state "Flying (en vuelo)" as Flying
+    Landed --> Flying : despegar
+    Flying --> Landed : aterrizar\n(altitud = 0, velocidad = 0)
+}
+
+state "Entrega" as Delivery {
+    [*] --> WithPackage
+    state "WithPackage" as WithPackage
+    state "PackageUnloaded" as PackageUnloaded
+    state "ReceptionPhotographed" as ReceptionPhotographed
+    state "DeliveryNotified" as DeliveryNotified
+    WithPackage --> PackageUnloaded : descargar paquete
+    PackageUnloaded --> ReceptionPhotographed : sacar foto
+    ReceptionPhotographed --> DeliveryNotified : notificar entrega
+}
+
+note bottom of Delivery
+  Las tres transiciones de entrega
+  requieren que el dron este en tierra.
+end note
+
+@enduml

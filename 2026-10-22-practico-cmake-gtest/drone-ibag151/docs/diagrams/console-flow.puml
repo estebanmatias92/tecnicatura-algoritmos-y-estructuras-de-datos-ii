@@ -1,0 +1,33 @@
+@startuml console-flow
+title Drone IBag151 - flujo de un comando de consola
+
+actor Usuario
+participant "ConsoleInterface" as Console
+participant "DroneIbag151" as Drone
+
+Usuario -> Console : escribe "despegar"
+Console -> Console : trim del texto
+Console -> Usuario : "> despegar" (eco)
+Console -> Drone : takeOff()
+
+alt transicion valida
+    Drone --> Console : OK
+    Console --> Usuario : "OK: despegar"
+else transicion invalida
+    Drone --> Console : DroneError
+    Console --> Usuario : "ERROR: <mensaje>"
+end
+
+Usuario -> Console : escribe "estado"
+Console -> Drone : flightState() / altitude() / speed()
+Console -> Drone : heading() / hasPackage() / deliveryStage()
+Console --> Usuario : estado de vuelo y entrega
+
+Usuario -> Console : escribe "salir"
+Console --> Usuario : "Hasta luego."
+note right of Console
+  El ciclo termina con "salir"
+  o al llegar al fin de la entrada.
+end note
+
+@enduml
