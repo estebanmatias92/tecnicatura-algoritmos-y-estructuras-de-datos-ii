@@ -6,9 +6,9 @@ The assignment asks for an object-oriented drone ("IBag151") with a console
 interface, a class diagram, SOLID/GRASP design, and one incremental unit test
 per activity.
 
-> **Status:** work in progress. This scaffold covers S0–S1 (build system and
-> the `despegar` activity). The remaining activities, console adapter,
-> diagrams and design documents are added in later increments.
+> **Status:** work in progress. The build system, the flight activities and
+> their unit tests are in place (S0–S8). The delivery workflow, console
+> adapter, diagrams and design documents are added in later increments.
 
 ## Layout
 
@@ -48,13 +48,13 @@ The CMake tree lives in `build/` and is not committed.
 | # | Activity | Interface method | Test | Status |
 |---|---|---|---|---|
 | 1 | Despegar | `Drone::takeOff` | `tests/test_despegar.cpp` | Done |
-| 2 | Aterrizar | — | — | Pending |
-| 3 | Elevar | — | — | Pending |
-| 4 | Bajar | — | — | Pending |
-| 5 | Girar a la derecha | — | — | Pending |
-| 6 | Girar a la izquierda | — | — | Pending |
-| 7 | Acelerar | — | — | Pending |
-| 8 | Frenar | — | — | Pending |
+| 2 | Aterrizar | `Drone::land` | `tests/test_aterrizar.cpp` | Done |
+| 3 | Elevar | `Drone::ascend` | `tests/test_elevar.cpp` | Done |
+| 4 | Bajar | `Drone::descend` | `tests/test_bajar.cpp` | Done |
+| 5 | Girar a la derecha | `Drone::turnRight` | `tests/test_girar_derecha.cpp` | Done |
+| 6 | Girar a la izquierda | `Drone::turnLeft` | `tests/test_girar_izquierda.cpp` | Done |
+| 7 | Acelerar | `Drone::accelerate` | `tests/test_acelerar.cpp` | Done |
+| 8 | Frenar | `Drone::brake` | `tests/test_frenar.cpp` | Done |
 | 9 | Descargar el paquete | — | — | Pending |
 | 10 | Sacar foto de la recepción | — | — | Pending |
 | 11 | Notificar la entrega | — | — | Pending |
