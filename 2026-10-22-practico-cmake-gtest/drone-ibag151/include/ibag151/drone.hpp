@@ -26,6 +26,9 @@ public:
     /// Loses altitude without reaching below ground. Requires flight.
     virtual void descend(int meters) = 0;
 
+    /// Rotates 90 degrees clockwise. Requires flight.
+    virtual void turnRight() = 0;
+
     virtual FlightState flightState() const = 0;
     virtual DeliveryStage deliveryStage() const = 0;
     virtual int altitude() const = 0;
