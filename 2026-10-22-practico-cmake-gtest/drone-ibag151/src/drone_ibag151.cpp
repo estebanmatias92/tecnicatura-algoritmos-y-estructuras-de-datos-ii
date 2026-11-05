@@ -50,6 +50,10 @@ void DroneIbag151::turnLeft() {
     heading_ = (heading_ + 270) % 360;
 }
 
+void DroneIbag151::accelerate(int amount) {
+    // Implementation added in the green step of the TDD cycle.
+}
+
 void DroneIbag151::requireFlying(const char* action) const {
     if (flight_state_ != FlightState::Flying) {
         throw DroneError(std::string("el drone debe estar en vuelo para ") + action);

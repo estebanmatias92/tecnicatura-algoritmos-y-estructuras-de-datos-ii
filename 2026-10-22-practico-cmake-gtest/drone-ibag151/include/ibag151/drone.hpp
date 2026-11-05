@@ -32,6 +32,9 @@ public:
     /// Rotates 90 degrees counter-clockwise. Requires flight.
     virtual void turnLeft() = 0;
 
+    /// Increases speed. Requires flight and a positive amount.
+    virtual void accelerate(int amount) = 0;
+
     virtual FlightState flightState() const = 0;
     virtual DeliveryStage deliveryStage() const = 0;
     virtual int altitude() const = 0;
