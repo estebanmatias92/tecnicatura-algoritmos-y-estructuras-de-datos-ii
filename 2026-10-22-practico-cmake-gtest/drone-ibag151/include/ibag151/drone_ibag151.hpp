@@ -21,6 +21,7 @@ public:
     void turnRight() override;
     void turnLeft() override;
     void accelerate(int amount) override;
+    void brake(int amount) override;
 
     FlightState flightState() const override;
     DeliveryStage deliveryStage() const override;
