@@ -25,6 +25,9 @@ private:
     /// Executes one raw input line. Returns false when the loop must stop.
     bool execute(const std::string& line);
 
+    void printStatus();
+    void printHelp();
+
     std::istream& in_;
     std::ostream& out_;
     Drone& drone_;

@@ -86,16 +86,16 @@ TEST_F(ConsoleTest, SalirStopsProcessing) {
 }
 
 TEST_F(ConsoleTest, FullDeliveryWorkflowCompletes) {
-    const std::string output = run(
-        "despegar\n"
-        "elevar 20\n"
-        "girar derecha\n"
-        "bajar 20\n"
-        "aterrizar\n"
-        "descargar paquete\n"
-        "sacar foto\n"
-        "notificar entrega\n"
-        "estado\n");
+    const std::string output =
+        run("despegar\n"
+            "elevar 20\n"
+            "girar derecha\n"
+            "bajar 20\n"
+            "aterrizar\n"
+            "descargar paquete\n"
+            "sacar foto\n"
+            "notificar entrega\n"
+            "estado\n");
 
     EXPECT_TRUE(Contains(output, "Entrega: notificada"));
     EXPECT_EQ(drone.deliveryStage(), DeliveryStage::DeliveryNotified);
