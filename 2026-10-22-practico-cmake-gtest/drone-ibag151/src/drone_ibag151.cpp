@@ -81,7 +81,10 @@ void DroneIbag151::takeReceptionPhoto() {
 }
 
 void DroneIbag151::notifyDelivery() {
-    // Implementation added in the green step of the TDD cycle.
+    requireLanded("notificar la entrega");
+    requireDeliveryStage(DeliveryStage::ReceptionPhotographed, "notificar la entrega");
+
+    delivery_stage_ = DeliveryStage::DeliveryNotified;
 }
 
 void DroneIbag151::requireFlying(const char* action) const {
