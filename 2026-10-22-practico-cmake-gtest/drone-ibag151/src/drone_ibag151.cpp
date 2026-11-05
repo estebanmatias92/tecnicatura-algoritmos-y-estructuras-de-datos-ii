@@ -74,7 +74,10 @@ void DroneIbag151::unloadPackage() {
 }
 
 void DroneIbag151::takeReceptionPhoto() {
-    // Implementation added in the green step of the TDD cycle.
+    requireLanded("sacar la foto de la recepcion");
+    requireDeliveryStage(DeliveryStage::PackageUnloaded, "sacar la foto de la recepcion");
+
+    delivery_stage_ = DeliveryStage::ReceptionPhotographed;
 }
 
 void DroneIbag151::requireFlying(const char* action) const {
