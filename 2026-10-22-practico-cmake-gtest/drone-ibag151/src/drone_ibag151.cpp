@@ -28,7 +28,14 @@ void DroneIbag151::ascend(int meters) {
 }
 
 void DroneIbag151::descend(int meters) {
-    // Implementation added in the green step of the TDD cycle.
+    requireFlying("bajar");
+    requirePositive(meters, "bajar");
+
+    if (meters > altitude_) {
+        throw DroneError("no se puede bajar por debajo del suelo");
+    }
+
+    altitude_ -= meters;
 }
 
 void DroneIbag151::requireFlying(const char* action) const {
