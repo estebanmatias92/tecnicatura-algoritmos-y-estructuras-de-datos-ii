@@ -38,6 +38,9 @@ public:
     /// Reduces speed without going below zero. Requires flight.
     virtual void brake(int amount) = 0;
 
+    /// Unloads the package. Requires landing with the package still on board.
+    virtual void unloadPackage() = 0;
+
     virtual FlightState flightState() const = 0;
     virtual DeliveryStage deliveryStage() const = 0;
     virtual int altitude() const = 0;

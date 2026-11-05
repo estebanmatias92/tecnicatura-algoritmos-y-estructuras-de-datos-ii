@@ -10,6 +10,7 @@ add_executable(drone_tests
     test_girar_izquierda.cpp
     test_acelerar.cpp
     test_frenar.cpp
+    test_descargar_paquete.cpp
 )
 
 target_link_libraries(drone_tests

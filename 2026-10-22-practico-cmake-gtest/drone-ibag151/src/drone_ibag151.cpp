@@ -66,6 +66,10 @@ void DroneIbag151::brake(int amount) {
     speed_ = std::max(0, speed_ - amount);
 }
 
+void DroneIbag151::unloadPackage() {
+    // Implementation added in the green step of the TDD cycle.
+}
+
 void DroneIbag151::requireFlying(const char* action) const {
     if (flight_state_ != FlightState::Flying) {
         throw DroneError(std::string("el drone debe estar en vuelo para ") + action);
