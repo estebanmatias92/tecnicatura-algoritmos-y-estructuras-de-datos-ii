@@ -51,7 +51,10 @@ void DroneIbag151::turnLeft() {
 }
 
 void DroneIbag151::accelerate(int amount) {
-    // Implementation added in the green step of the TDD cycle.
+    requireFlying("acelerar");
+    requirePositive(amount, "acelerar");
+
+    speed_ += amount;
 }
 
 void DroneIbag151::requireFlying(const char* action) const {
