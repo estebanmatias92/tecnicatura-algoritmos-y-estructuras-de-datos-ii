@@ -21,4 +21,15 @@ TEST_F(DroneTest, LandTwiceIsRejected) {
     EXPECT_THROW(drone.land(), DroneError);
 }
 
+TEST_F(DroneTest, LandResetsAltitudeAndSpeed) {
+    drone.takeOff();
+    drone.ascend(40);
+    drone.accelerate(20);
+
+    drone.land();
+
+    EXPECT_EQ(drone.altitude(), 0);
+    EXPECT_EQ(drone.speed(), 0);
+}
+
 }  // namespace ibag151::test
