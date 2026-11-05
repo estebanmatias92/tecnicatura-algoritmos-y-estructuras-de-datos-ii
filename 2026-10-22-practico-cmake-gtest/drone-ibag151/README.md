@@ -6,8 +6,8 @@ The assignment asks for an object-oriented drone ("IBag151") with a console
 interface, a class diagram, SOLID/GRASP design, and one incremental unit test
 per activity.
 
-> **Status:** work in progress. The build system, the flight activities and
-> their unit tests are in place (S0–S8). The delivery workflow, console
+> **Status:** work in progress. The build system and all eleven drone
+> activities with their unit tests are in place (S0–S11). The console
 > adapter, diagrams and design documents are added in later increments.
 
 ## Layout
@@ -55,9 +55,9 @@ The CMake tree lives in `build/` and is not committed.
 | 6 | Girar a la izquierda | `Drone::turnLeft` | `tests/test_girar_izquierda.cpp` | Done |
 | 7 | Acelerar | `Drone::accelerate` | `tests/test_acelerar.cpp` | Done |
 | 8 | Frenar | `Drone::brake` | `tests/test_frenar.cpp` | Done |
-| 9 | Descargar el paquete | — | — | Pending |
-| 10 | Sacar foto de la recepción | — | — | Pending |
-| 11 | Notificar la entrega | — | — | Pending |
+| 9 | Descargar el paquete | `Drone::unloadPackage` | `tests/test_descargar_paquete.cpp` | Done |
+| 10 | Sacar foto de la recepción | `Drone::takeReceptionPhoto` | `tests/test_sacar_foto.cpp` | Done |
+| 11 | Notificar la entrega | `Drone::notifyDelivery` | `tests/test_notificar_entrega.cpp` | Done |
 
 ## Design notes
 
