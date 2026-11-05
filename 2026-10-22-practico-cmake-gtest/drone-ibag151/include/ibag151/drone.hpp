@@ -23,6 +23,9 @@ public:
     /// Gains altitude. Requires flight and a positive amount.
     virtual void ascend(int meters) = 0;
 
+    /// Loses altitude without reaching below ground. Requires flight.
+    virtual void descend(int meters) = 0;
+
     virtual FlightState flightState() const = 0;
     virtual DeliveryStage deliveryStage() const = 0;
     virtual int altitude() const = 0;

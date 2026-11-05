@@ -5,6 +5,7 @@ add_executable(drone_tests
     test_despegar.cpp
     test_aterrizar.cpp
     test_elevar.cpp
+    test_bajar.cpp
 )
 
 target_link_libraries(drone_tests
