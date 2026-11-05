@@ -1,0 +1,30 @@
+#ifndef IBAG151_DRONE_HPP
+#define IBAG151_DRONE_HPP
+
+#include "drone_state.hpp"
+
+namespace ibag151 {
+
+/// Port that models the activities required by the assignment.
+///
+/// Callers depend on this abstraction (DIP), so the console adapter can be
+/// tested with a fake drone and the concrete drone can evolve independently.
+/// The interface grows one activity at a time, driven by its failing test.
+class Drone {
+public:
+    virtual ~Drone() = default;
+
+    /// Leaves the ground. Requires the drone to be landed.
+    virtual void takeOff() = 0;
+
+    virtual FlightState flightState() const = 0;
+    virtual DeliveryStage deliveryStage() const = 0;
+    virtual int altitude() const = 0;
+    virtual int heading() const = 0;
+    virtual int speed() const = 0;
+    virtual bool hasPackage() const = 0;
+};
+
+}  // namespace ibag151
+
+#endif  // IBAG151_DRONE_HPP
