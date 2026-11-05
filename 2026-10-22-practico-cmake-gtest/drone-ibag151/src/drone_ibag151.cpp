@@ -45,7 +45,9 @@ void DroneIbag151::turnRight() {
 }
 
 void DroneIbag151::turnLeft() {
-    // Implementation added in the green step of the TDD cycle.
+    requireFlying("girar a la izquierda");
+
+    heading_ = (heading_ + 270) % 360;
 }
 
 void DroneIbag151::requireFlying(const char* action) const {
