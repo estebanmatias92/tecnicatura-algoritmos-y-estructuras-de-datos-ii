@@ -29,6 +29,9 @@ public:
     /// Rotates 90 degrees clockwise. Requires flight.
     virtual void turnRight() = 0;
 
+    /// Rotates 90 degrees counter-clockwise. Requires flight.
+    virtual void turnLeft() = 0;
+
     virtual FlightState flightState() const = 0;
     virtual DeliveryStage deliveryStage() const = 0;
     virtual int altitude() const = 0;
